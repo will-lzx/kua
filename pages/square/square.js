@@ -96,6 +96,7 @@ Page({
       navScrollLeft: (cur - 2) * singleNavWidth
     });
   },
+
   gotodetail(){
     wx.navigateTo({
       url: '/pages/detail/detail',

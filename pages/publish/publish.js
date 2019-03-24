@@ -5,7 +5,48 @@ Page({
    * Page initial data
    */
   data: {
+    getinput: null,
+    getcontent: null
+  },
+  getinput: function(e) {
+    this.data.getinput = e.detail.value;
+  },
+  getcontent: function(e) {
+    this.data.getcontent = e.detail.value;
+  },
 
+  publish: function() {
+    var content = this.data.getcontent
+    var value = this.data.getinput
+    if (content == null || content == '') {
+      wx.showToast({
+        title: '请输入求夸内容'
+      })
+    } else if (value == null || value == ''){
+      wx.showToast({
+        title: '请输入悬赏金额'
+      })
+    } else {
+      wx.cloud.init()
+      const db = wx.cloud.database();
+      db.collection('qiukua').add({
+        data: {
+          content: this.data.getcontent,
+          money: this.data.getinput,
+          due: new Date(),
+          tags: [
+            'cloud',
+          ],
+          done: false
+        },
+        success(res) {
+          wx.navigateTo({
+            url: '/pages/detail/detail?id=' + res._id,
+          })
+        },
+        fail: console.error
+      }) 
+    }
   },
 
   /**
