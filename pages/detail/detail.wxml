@@ -1,3 +1,4 @@
 <!--pages/detail/detail.wxml-->
-<text>pages/detail/detail.wxml</text>
-<view>{{content}}</view>
+<view class='' wx:for='{{list}}' wx:for-index='idx' wx:for-item='item' wx:key='idx' >
+  {{idx}}:{{item._id}}
+</view>

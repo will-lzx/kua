@@ -5,32 +5,20 @@ Page({
    * Page initial data
    */
   data: {
-    id: 0,
-    content: '',
-    openid: '',
-    done: false,
-    due: '',
-    money: '',
+    list: []
   },
 
   /**
    * Lifecycle function--Called when page load
    */
   onLoad: function (options) {
-    var db = wx.cloud.database()
-    this.setData({
-      id:options.id
-    }),
+    const db = wx.cloud.database()
     db.collection('qiukua').where({
-      _id: this.data.id
+      _id:options.id
     }).get({
-      success(res) {
+      success: res => {
         this.setData({
-          content: res.data[0].content,
-          openid: res.data[0]._openid,
-          done: res.data[0].done,
-          due: res.data[0].due,
-          money: res.data[0].money
+          list: res.data
         })
       }
     })
@@ -40,7 +28,7 @@ Page({
    * Lifecycle function--Called when page is initially rendered
    */
   onReady: function () {
-
+    
   },
 
   /**
