@@ -1,4 +1,14 @@
-
+<view class="mrzj_bg">
+   <view class="mrzj_til">每日最佳</view>
+   <view class="mrzj_con">   
+      <view class="h1">嘴巴灵活，风起云涌，夸奖内容如是</view>
+      <view class="mrzj_con_zt">For：今天嘴巴起泡了，求夸</view>
+      <view class="like_bg">
+          <view><image class="like_heart1" src="/pics/like1.png" mode="aspectFill"></image></view>
+          <view class="zt_white">12890</view>
+      </view>
+   </view>
+</view>
 <view class="swiper-tab">
   <view class="swiper-tab-item {{currentTab==0 ? 'on' : ''}}" data-current="0" bindtap="swichNav">热门求夸</view> 
   <view class="swiper-tab-item {{currentTab==1 ? 'on' : ''}}" data-current="1" bindtap="swichNav">附近求夸</view>

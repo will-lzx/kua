@@ -5,28 +5,38 @@
     "pages/logs/logs",
     "pages/private/private",
     "pages/publish/publish",
-    "pages/detail/detail"
+    "pages/detail/detail",
+    "pics"
   ],
   "window": {
     "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "WeChat",
-    "navigationBarTextStyle": "black"
+    "navigationBarBackgroundColor": "#ff4d4d",
+    "navigationBarTitleText": "正能量夸夸群",
+    "navigationBarTextStyle": "white"
   },
   "tabBar": {
-    "selectedColor": "#f00",
+    "selectedColor": "#d81e06",
     "list": [
       {
+        "index": 0,
+        "iconPath": "./pics/qz1.png",
+        "selectedIconPath": "./pics/qz2.png",
         "pagePath": "pages/square/square",
-        "text": "求夸广场"
+        "text": "悬赏"
       },
       {
+        "index": 1,
+        "iconPath": "./pics/fb1.png",
+        "selectedIconPath": "./pics/fb2.png",
         "pagePath": "pages/publish/publish",
-        "text": "发夸奖"
+        "text": "我要求夸"
       },
       {
+        "index": 2,
+        "iconPath": "./pics/tx1.png",
+        "selectedIconPath": "./pics/tx2.png",
         "pagePath": "pages/private/private",
-        "text": "我的收获"
+        "text": "提现"
       }
     ]
   }
