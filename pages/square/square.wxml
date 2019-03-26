@@ -7,14 +7,16 @@
 
 
   <swiper-item> 
-    <block wx:for-items="{{hot}}" wx:for-item="item">
+    <block wx:for="{{hot}}" wx:for-item="item" wx:key='idx'>
       <view class="kua-item">{{item.content}}</view>
+      <view class="kua-item">{{item.money}}</view>
     </block>
   </swiper-item> 
 
   <swiper-item> 
-   <block wx:for-items="{{near}}" wx:for-item="item">
+   <block wx:for="{{near}}" wx:for-item="item" wx:key='idx'>
       <view class="kua-item">{{item.content}}</view>
+      <view class="kua-item">{{item.money}}</view>
     </block>
   </swiper-item> 
 
