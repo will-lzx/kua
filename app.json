@@ -5,9 +5,8 @@
     "pages/logs/logs",
     "pages/private/private",
     "pages/publish/publish",
-    "pages/detail/detail",
-    "pics"
-  ],
+    "pages/detail/detail"
+],
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#ff4d4d",
@@ -19,7 +18,7 @@
     "list": [
       {
         "index": 0,
-        "iconPath": "./pics/qz1.png",
+        "iconPath": "./res/qz1.png",
         "selectedIconPath": "./pics/qz2.png",
         "pagePath": "pages/square/square",
         "text": "悬赏"
