@@ -18,7 +18,7 @@
     "list": [
       {
         "index": 0,
-        "iconPath": "./res/qz1.png",
+        "iconPath": "./pics/qz1.png",
         "selectedIconPath": "./pics/qz2.png",
         "pagePath": "pages/square/square",
         "text": "悬赏"
