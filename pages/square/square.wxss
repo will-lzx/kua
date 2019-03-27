@@ -34,7 +34,7 @@
   color: #333;
   background-color: white;
   border-radius:30px;
-  border: 1px #d3d3d3 solid;
+  border: 1px rgba(228, 227, 227, 0.8) solid;
   
 }
 .on {
@@ -51,9 +51,7 @@
   overflow: hidden;
 }
 
-.swiper-box view {
-  text-align: left;
-}
+
 .mrzj_bg{
   width: 100%;
   background: #ff4d4d;
@@ -154,8 +152,18 @@ text-align: left;
 }
 .qk_money{
   font-weight: bold;
-  position: absolute;right:35rpx;top:35rpx;
+  position: absolute;right:35rpx;top:40rpx;
   color: #ff4d4d;
+  width: 30px;
+  height: 30px;
+  border-radius:50%;
+  border: 1px solid rgba(228, 227, 227, 0.6);
+  line-height: 30px;
+  text-align: center;
+}
+.qk_money_f{
+  font-size: 12px;
+  color: #aaa;
 }
 .img_tx{
   width: 50px;

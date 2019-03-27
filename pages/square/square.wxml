@@ -24,7 +24,7 @@
            <view class="con_h3">reakyzhou</view>
            <view class="h2">今日上火，嘴巴长泡，求夸</view>      
        </view>
-       <view class="qk_money">¥10</view>
+       <view class="qk_money"><span class="qk_money_f">¥</span>12</view>
    </view>
     <view class="qkzt_con">
        <view class="qk_left">
@@ -34,7 +34,7 @@
            <view class="con_h3">reakyzhou</view>
            <view class="h2">老得头发掉下来了，还能长出新的头发来，夸</view>      
        </view>
-       <view class="qk_money">¥10</view>
+       <view class="qk_money"><span class="qk_money_f">¥</span>10</view>
    </view>
     <view class="qkzt_con">
        <view class="qk_left">
@@ -44,7 +44,7 @@
            <view class="con_h3">reakyzhou</view>
            <view class="h2">天青色等烟雨，而我在等你，求夸</view>      
        </view>
-       <view class="qk_money">¥10</view>
+       <view class="qk_money"><span class="qk_money_f">¥</span>18</view>
    </view>
     <view class="qkzt_con">
        <view class="qk_left">
@@ -54,7 +54,7 @@
            <view class="con_h3">reakyzhou</view>
            <view class="h2">今天下雨，心情很不好，求夸</view>      
        </view>
-       <view class="qk_money">¥10</view>
+       <view class="qk_money"><span class="qk_money_f">¥</span>2</view>
    </view>
 
     <swiper-item> 
