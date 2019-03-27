@@ -25,21 +25,24 @@
   width: 100%;
   text-align: center;
   line-height: 80rpx;
-  margin-top:10rpx;
-  margin-bottom: 20rpx;
 }
-
 .swiper-tab-item {
-  font-size: 30rpx;
+  font-size: 14px;
   display: inline-block;
-  width: 33.33%;
-  color: #666;
+  width: 39%;
+  margin: 10px 5% 0px 5%;
+  color: #333;
+  background-color: white;
+  border-radius:30px;
+  border: 1px #d3d3d3 solid;
+  
+}
+.on {
+  color: #ff4d4d;
+  font-weight: bold;
 }
 
-.on {
-  color: #FEA611;
-  border-bottom: 5rpx solid #FEA611;
-}
+
 
 .swiper-box {
   display: block;
@@ -49,7 +52,7 @@
 }
 
 .swiper-box view {
-  text-align: center;
+  text-align: left;
 }
 .mrzj_bg{
   width: 100%;
@@ -76,7 +79,7 @@
 }
 .mrzj_con{
   height: 100%;
-  background-color:rgba(255,255,255,0.3);
+  background-color:rgba(255,255,255,0.2);
   color: white;
   border-radius:8px;
   margin: 0 20rpx;
@@ -89,10 +92,20 @@
   float: left;
 }
 .h1{
-  font-size: 20px;
+  font-size: 16px;
   line-height: 24px;
   width: 80%;
   font-weight: bold;
+}
+.h2{
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: bold;
+}
+.con_h3{
+  font-size: 14px;
+  line-height: 30px;
+  color: #666;
 }
 .like_bg{
   text-align: center;
@@ -111,5 +124,42 @@
   height: 40px;
   
   display: inline-block;
+  border: none;
+}
+.conter{
+  width: 100%;
+  height: 100%;
+  background: rgba(228, 227, 227, 0.4)
+}
+.qkzt_con{
+  background-color:white;
+  margin: 20rpx 0;
+  padding: 35rpx;
+  display: block;
+  position: relative;
+  font-size: 14px;
+  overflow: hidden;
+}
+.qk_left{
+  float: left;
+  widows: 30%;
+  text-align: center;
+  margin-top: 10rpx;
+}
+.qk_mid{
+float: left;
+width: 70%;
+margin-left: 20rpx;
+text-align: left;
+}
+.qk_money{
+  font-weight: bold;
+  position: absolute;right:35rpx;top:35rpx;
+  color: #ff4d4d;
+}
+.img_tx{
+  width: 50px;
+  height: 50px;
+  border-radius:50%;
   border: none;
 }
