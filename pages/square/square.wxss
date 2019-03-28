@@ -29,17 +29,15 @@
 .swiper-tab-item {
   font-size: 14px;
   display: inline-block;
-  width: 39%;
-  margin: 10px 5% 0px 5%;
-  color: #333;
-  background-color: white;
-  border-radius:30px;
-  border: 1px rgba(228, 227, 227, 0.8) solid;
-  
+  width: 15%;
+  margin: 15px 5% 0px 5%;
+  color: #666;
+ line-height: 24px;
 }
 .on {
-  color: #ff4d4d;
+  color: #000000;
   font-weight: bold;
+  border-bottom: 1px rgba(241, 59, 59, 0.8) solid;
 }
 
 
@@ -56,6 +54,7 @@
   width: 100%;
   background: #ff4d4d;
   padding-bottom: 20px;
+
 }
 .mrzj_til{
   font-size: 14px;
@@ -82,7 +81,6 @@
   border-radius:8px;
   margin: 0 20rpx;
   padding: 10px;
-  border: 1px rgba(253, 227, 227, 0.2) solid;
   position: relative;
 }
 .mrzj_con_left{
@@ -126,7 +124,7 @@
 .conter{
   width: 100%;
   height: 100%;
-  background: rgba(228, 227, 227, 0.4)
+  background: rgba(228, 227, 227, 0.4);
 }
 .qkzt_con{
   background-color:white;

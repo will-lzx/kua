@@ -1,1 +1,28 @@
 /* pages/publish/publish.wxss */
+.fb_bg{
+  width: 100%;
+  background: #ff4d4d;
+  padding-bottom: 20px;
+
+}
+.fb_til{
+  font-size: 16px;
+  color: white;
+  line-height: 30px;
+  margin-left: 30rpx;
+  font-weight: bold;
+}
+.fb_dis{
+  font-size: 14px;
+  line-height: 20px;
+  border-radius:10px;
+  margin: 10rpx 30rpx;
+  background-color: white;
+  padding: 20rpx;
+  
+}
+.zt_white{
+  font-size: 14px;
+  color: white;
+  line-height: 30px;
+}

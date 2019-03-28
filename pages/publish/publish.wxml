@@ -1,5 +1,9 @@
 <!--pages/publish/publish.wxml-->
-
+<view class="fb_bg">
+   <view class="fb_til">发布心情，悬赏求夸</view>
+   <view class="fb_dis"><textarea style="width:100%; height: 80px;"  maxlength="50" bindinput="bindWordLimit" placeholder='请输入想求夸的内容。如：我不开心，求夸' bindinput='getcontent'>
+</textarea></view>
+</view>
 <div>发布悬赏，征集夸赞</div>
 <textarea placeholder='请输入想求夸的内容。如：我不开心，求夸' bindinput='getcontent'>
 </textarea>
