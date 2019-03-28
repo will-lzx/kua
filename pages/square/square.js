@@ -4,6 +4,7 @@ const app = getApp()
 
 Page({
   data: {
+    userInfo: {},
     navData: [
       {
         "text": "热门求夸"
@@ -17,12 +18,6 @@ Page({
     hot: [],
     near: []
   },
-  //事件处理函数
-  bindViewTap: function () {
-    wx.navigateTo({
-      url: '../logs/logs'
-    })
-  },
   onLoad: function (options) {
     var that = this;
     wx.getSystemInfo({
@@ -33,7 +28,7 @@ Page({
       }
     });
     if (app.globalData.userInfo) {
-      this.setData({
+      that.setData({
         userInfo: app.globalData.userInfo,
         hasUserInfo: true
       })
@@ -41,7 +36,7 @@ Page({
       // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
       // 所以此处加入 callback 以防止这种情况
       app.userInfoReadyCallback = res => {
-        this.setData({
+        that.setData({
           userInfo: res.userInfo,
           hasUserInfo: true
         })
@@ -51,7 +46,7 @@ Page({
       wx.getUserInfo({
         success: res => {
           app.globalData.userInfo = res.userInfo
-          this.setData({
+          that.setData({
             userInfo: res.userInfo,
             hasUserInfo: true
           })
@@ -88,12 +83,15 @@ Page({
     })
   },
   bindChange: function (e) {
-
     var that = this;
     that.setData({ currentTab: e.detail.current });
-
   },
-
+  bindClick: function (e) {
+    var id = e.currentTarget.dataset.id
+    wx.navigateTo({
+      url: '/pages/detail/detail?id=' + id
+    })
+  },
   swichNav: function (e) {
     var that = this;
     if (this.data.currentTab === e.target.dataset.current) {

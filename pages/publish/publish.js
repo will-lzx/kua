@@ -1,4 +1,6 @@
 // pages/publish/publish.js
+const app = getApp()
+
 Page({
 
   /**
@@ -16,6 +18,7 @@ Page({
   },
 
   publish: function() {
+    var userInfo = app.globalData.userInfo
     var content = this.data.getcontent
     var value = this.data.getinput
     if (content == null || content == '') {
@@ -34,6 +37,11 @@ Page({
           content: this.data.getcontent,
           money: this.data.getinput,
           due: new Date(),
+          nickname: userInfo.nickName,
+          avatarUrl: userInfo.avatarUrl,
+          gender: userInfo.gender,
+          city: userInfo.city,
+          province: userInfo.province,
           tags: [
             'cloud',
           ],
