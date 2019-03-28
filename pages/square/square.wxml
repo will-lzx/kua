@@ -15,61 +15,35 @@
   <view class="swiper-tab-item {{currentTab==1 ? 'on' : ''}}" data-current="1"    bindtap="swichNav">附近求夸</view>
 </view> 
 
-<swiper current="{{currentTab}}" class="swiper-box" duration="300" style="height:{{clientHeight?clientHeight-'40'+'px':'auto'}}" bindchange="bindChange" > 
-   <view class="qkzt_con">
-       <view class="qk_left">
-          <image class="img_tx" src="/pics/tx.jpg" mode="aspectFill"></image>
-       </view>
-       <view class="qk_mid">
-           <view class="con_h3">reakyzhou</view>
-           <view class="h2">今日上火，嘴巴长泡，求夸</view>      
-       </view>
-       <view class="qk_money"><span class="qk_money_f">¥</span>12</view>
-   </view>
-    <view class="qkzt_con">
-       <view class="qk_left">
-          <image class="img_tx" src="/pics/tx.jpg" mode="aspectFill"></image>
-       </view>
-       <view class="qk_mid">
-           <view class="con_h3">reakyzhou</view>
-           <view class="h2">老得头发掉下来了，还能长出新的头发来，夸</view>      
-       </view>
-       <view class="qk_money"><span class="qk_money_f">¥</span>10</view>
-   </view>
-    <view class="qkzt_con">
-       <view class="qk_left">
-          <image class="img_tx" src="/pics/tx.jpg" mode="aspectFill"></image>
-       </view>
-       <view class="qk_mid">
-           <view class="con_h3">reakyzhou</view>
-           <view class="h2">天青色等烟雨，而我在等你，求夸</view>      
-       </view>
-       <view class="qk_money"><span class="qk_money_f">¥</span>18</view>
-   </view>
-    <view class="qkzt_con">
-       <view class="qk_left">
-          <image class="img_tx" src="/pics/tx.jpg" mode="aspectFill"></image>
-       </view>
-       <view class="qk_mid">
-           <view class="con_h3">reakyzhou</view>
-           <view class="h2">今天下雨，心情很不好，求夸</view>      
-       </view>
-       <view class="qk_money"><span class="qk_money_f">¥</span>2</view>
-   </view>
-
-    <swiper-item> 
-    <block wx:for="{{hot}}" wx:for-item="item" wx:key='idx'>
-      <view class="kua-item">{{item.content}}</view>
-      <view class="kua-item">{{item.money}}</view>
-    </block>
-    </swiper-item> 
-  
+<swiper current="{{currentTab}}" class="swiper-box" duration="300" style="height:{{clientHeight?clientHeight-'40'+'px':'auto'}}" bindchange="bindChange" >
   <swiper-item> 
-   <block wx:for="{{near}}" wx:for-item="item" wx:key='idx'>
-      <view class="kua-item">{{item.content}}</view>
-      <view class="kua-item">{{item.money}}</view>
+    <block wx:for="{{hot}}" wx:for-item="item" wx:key='idx'>
+      <view class="qkzt_con">
+        <view class="qk_left">
+            <image class="img_tx" src="/pics/tx.jpg" mode="aspectFill"></image>
+        </view>
+        <view class="qk_mid">
+            <view class="con_h3">reakyzhou</view>
+            <view class="h2">{{item.content}}</view>      
+        </view>
+        <view class="qk_money"><span class="qk_money_f">¥</span>{{item.money}}</view>
+      </view>
     </block>
   </swiper-item> 
-
+  
+  <swiper-item> 
+    <block wx:for="{{near}}" wx:for-item="item" wx:key='idx'>
+      <view class="qkzt_con">
+        <view class="qk_left">
+            <image class="img_tx" src="/pics/tx.jpg" mode="aspectFill"></image>
+        </view>
+        <view class="qk_mid">
+            <view class="con_h3">reakyzhou</view>
+            <view class="h2">{{item.content}}</view>      
+        </view>
+        <view class="qk_money"><span class="qk_money_f">¥</span>{{item.money}}</view>
+      </view>
+    </block>
+  </swiper-item>
 </swiper>
 </view>
