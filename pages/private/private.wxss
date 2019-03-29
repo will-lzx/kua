@@ -1,1 +1,25 @@
 /* pages/private/private.wxss */
+.tx_bg{
+  width: 100%;
+  background: #ff4d4d;
+  padding-bottom: 20px;
+
+}
+.tx_til{
+  font-size: 14px;
+  color: white;
+  line-height: 30px;
+  margin-left: 20rpx;
+  font-weight: bold;
+}
+.tx_con_zt{
+  font-size: 14px;
+  color: white;
+  line-height: 30px;
+  width: 80%;
+}
+.tx_white{
+  font-size: 14px;
+  color: white;
+  line-height: 30px;
+}

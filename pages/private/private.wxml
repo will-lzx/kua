@@ -1,4 +1,23 @@
 <!--pages/private/private.wxml-->
+<view class="tx_bg">
+   <view class="tx_til"></view>
+   <view class="mrzj_con">   
+      <view class="h1">{{best.content}}</view>
+      <view class="mrzj_con_zt">For：真的很赞</view>
+      <view class="like_bg">
+          <view><image class="like_heart1" src="/pics/like1.png" mode="aspectFill"></image></view>
+          <view class="zt_white">12890</view>
+      </view>
+   </view>
+</view>
+
+
+
+
+
+
+
+
 <view class="container">
   <block >
     <text>昨日最佳\n</text>
