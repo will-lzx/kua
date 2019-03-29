@@ -16,9 +16,11 @@ Page({
     // tab切换 
     currentTab: 0,
     hot: [],
-    near: []
+    near: [],
+    best: []
   },
   onLoad: function (options) {
+    wx.cloud.init()
     var that = this;
     wx.getSystemInfo({
       success: function (res) {
@@ -53,11 +55,10 @@ Page({
         }
       })
     };
-    wx.cloud.init()
     const db = wx.cloud.database()
     db.collection('qiukua').where({
       done: false
-    }).get({
+    }).orderBy('due', 'desc').get({
       success: res => {
         this.setData({
           hot: res.data
@@ -66,10 +67,19 @@ Page({
     }),
     db.collection('qiukua').where({
       done: false
-    }).get({
+    }).orderBy('due', 'desc').get({
       success: res => {
         this.setData({
           near: res.data
+        })
+      }
+    }),
+    db.collection('qiukua').where({
+      done: false
+    }).orderBy('due', 'desc').get({
+      success: res => {
+        this.setData({
+          best: res.data[0]
         })
       }
     })
