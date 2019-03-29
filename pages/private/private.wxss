@@ -1,1 +1,171 @@
-/* pages/private/private.wxss */
+/**index.wxss**/
+.userinfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.userinfo-avatar {
+  width: 128rpx;
+  height: 128rpx;
+  margin: 20rpx;
+  border-radius: 50%;
+}
+
+.userinfo-nickname {
+  color: #aaa;
+}
+
+.usermotto {
+  margin-top: 200px;
+}
+
+
+.swiper-tab {
+  width: 100%;
+  text-align: center;
+  line-height: 80rpx;
+}
+.swiper-tab-item {
+  font-size: 14px;
+  display: inline-block;
+  width: 15%;
+  margin: 15px 5% 0px 5%;
+  color: #666;
+ line-height: 24px;
+}
+.on {
+  color: #000000;
+  font-weight: bold;
+  border-bottom: 1px rgba(241, 59, 59, 0.8) solid;
+}
+
+
+
+.swiper-box {
+  display: block;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+
+.mrzj_bg{
+  width: 100%;
+  background: #ff4d4d;
+  padding-bottom: 20px;
+
+}
+.mrzj_til{
+  font-size: 14px;
+  color: white;
+  line-height: 30px;
+  margin-left: 20rpx;
+  font-weight: bold;
+}
+.mrzj_con_zt{
+  font-size: 14px;
+  color: white;
+  line-height: 30px;
+  width: 80%;
+}
+.zt_white{
+  font-size: 14px;
+  color: white;
+  line-height: 30px;
+}
+.mrzj_con{
+  height: 100%;
+  background-color:rgba(255,255,255,0.2);
+  color: white;
+  border-radius:8px;
+  margin: 0 20rpx;
+  padding: 10px;
+  position: relative;
+}
+.mrzj_con_left{
+  width: 80%;
+  float: left;
+}
+.h1{
+  font-size: 16px;
+  line-height: 24px;
+  width: 80%;
+  font-weight: bold;
+}
+.h2{
+  font-size: 16px;
+  line-height: 24px;
+}
+.con_h3{
+  font-size: 14px;
+  line-height: 30px;
+  color: #666;
+}
+.like_bg{
+  text-align: center;
+  position: absolute;right:20rpx;top:10px;
+}
+.like_heart1{
+  width: 20px;
+  height: 20px;
+  border-radius:20px;
+  padding: 5px;
+  background-color: white;
+  margin-bottom: -10px;
+}
+.image{
+  width: 40px;
+  height: 40px;
+  
+  display: inline-block;
+  border: none;
+}
+.conter{
+  width: 100%;
+  height: 100%;
+  background: rgba(228, 227, 227, 0.4);
+}
+.qkzt_con{
+  background-color:white;
+  margin: 20rpx 0;
+  padding: 35rpx;
+  display: block;
+  position: relative;
+  font-size: 14px;
+  overflow: hidden;
+}
+.qk_left{
+  float: left;
+  widows: 30%;
+  text-align: center;
+  margin-top: 10rpx;
+}
+.qk_mid{
+float: left;
+width: 70%;
+margin-left: 20rpx;
+text-align: left;
+}
+.qk_money{
+  font-weight: bold;
+  position: absolute;right:35rpx;top:40rpx;
+  color: #ff4d4d;
+  width: 30px;
+  height: 30px;
+  border-radius:50%;
+  border: 1px solid rgba(228, 227, 227, 0.6);
+  line-height: 30px;
+  text-align: center;
+}
+.qk_money_f{
+  font-size: 12px;
+  color: #aaa;
+  font: normal
+}
+.img_tx{
+  width: 50px;
+  height: 50px;
+  border-radius:50%;
+  border: none;
+}
