@@ -107,7 +107,7 @@ background-color:#feffbb;
 }
 
 .mrzj_con{
-  height: 100%;
+  /* height: 100%; */
   color: #333;
   border-radius:8px;
   margin: 20rpx 35rpx;
