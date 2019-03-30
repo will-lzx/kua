@@ -60,6 +60,7 @@ Page({
       done: false
     }).orderBy('due', 'desc').get({
       success: res => {
+        console.log(res.data)
         this.setData({
           hot: res.data
         })
@@ -85,7 +86,6 @@ Page({
     })
   },
   getUserInfo: function (e) {
-    console.log(e)
     app.globalData.userInfo = e.detail.userInfo
     this.setData({
       userInfo: e.detail.userInfo,

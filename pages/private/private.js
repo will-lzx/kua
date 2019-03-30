@@ -56,7 +56,6 @@ Page({
         }
       })
     }
-    console.log(this.data.userInfo)
     const db = wx.cloud.database()
     db.collection('qiukua').orderBy('due', 'desc').get({
       success: res => {

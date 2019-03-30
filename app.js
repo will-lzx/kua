@@ -1,16 +1,21 @@
 //app.js
 App({
+  globalData: {
+    appid: 'wxeaa0f28216ef58ec',
+    secret: '69997226f3514b7c386ca85287f77056',
+  },
   onLaunch: function () {
     // 展示本地存储能力
     var logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now())
     wx.setStorageSync('logs', logs)
 
+    var user = wx.getStorageSync('user') || []
+    var that = this
     // 登录
     wx.login({
       success: res => {
-        // 发送 res.code 到后台换取 openId, sessionKey, unionId
-        console.log('Test')
+        
       }
     })
     // 获取用户信息

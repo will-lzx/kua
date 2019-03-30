@@ -1,4 +1,8 @@
 <!--pages/detail/detail.wxml-->
 <view class='' wx:for='{{list}}' wx:for-index='idx' wx:for-item='item' wx:key='idx' >
-  {{idx}}:{{item._id}}
+  <image src='{{item.avatarUrl}}'></image>
+  <text>{{item.nickname}}</text>
+  <view>{{item.content}}</view>
+  <view>{{item.money}}</view>
 </view>
+
