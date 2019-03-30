@@ -48,6 +48,7 @@ scroll-view{
   width: 100%;
   background: #ff4d4d;
   padding-bottom: 20px;
+  
 }
 .mrzj_til{
   font-size: 14px;
@@ -117,15 +118,15 @@ scroll-view{
 .conter{
   width: 100%;
   height: 100%;
-  background: rgba(228, 227, 227, 0.4);
 }
 .qkzt_con{
-  background-color:white;
-  margin: 20rpx 0;
-  padding: 35rpx;
-  display: block;
+  color: #333;
+  border-radius:8px;
+  margin: 20rpx 35rpx;
+  padding: 40rpx;
   position: relative;
-  font-size: 14px;
+  border: 1px solid rgba(204, 204, 204, 0.2);
+  background-color: rgba(230, 230, 230, 0.1);
   overflow: hidden;
 }
 .qk_left{
@@ -150,6 +151,7 @@ text-align: left;
   border: 1px solid rgba(228, 227, 227, 0.6);
   line-height: 30px;
   text-align: center;
+  font-size: 14px;
 }
 .qk_money_f{
   font-size: 12px;

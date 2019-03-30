@@ -1,8 +1,74 @@
 <!--pages/detail/detail.wxml-->
-<view class='' wx:for='{{list}}' wx:for-index='idx' wx:for-item='item' wx:key='idx' >
-  <image src='{{item.avatarUrl}}'></image>
-  <text>{{item.nickname}}</text>
-  <view>{{item.content}}</view>
-  <view>{{item.money}}</view>
+<view class="det_bg" wx:for='{{list}}' wx:for-index='idx' wx:for-item='item' wx:key='idx'>
+   <view class="gr_left"><image class="img_tx" src="{{item.avatarUrl}}" mode="aspectFill"></image></view>
+   <view class="h2">{{item.nickname}}</view>
+   <view class="det_til">{{item.content}}发布心情，悬赏求夸</view>
+   <view class="det_xs">悬赏求夸{{item.money}}元</view> 
 </view>
 
+<!--进行中的状态-->
+ <view class="time_h3">可在<span class="time_red">00:14:18</span>内,邀请好友分赏</view>
+
+ <view class="qkzt_con" bindtap='bindClick'>
+        <view class="qk_left">
+            <image class="img_tx2" src="{{userInfo.avatarUrl}}" mode="aspectFill"></image>
+        </view>
+        <view class="qk_mid">
+            <view class="con_h5">夸奖者昵称【12:20:08】</view>
+            <view class="h3">夸奖内容显示在这里，以无节操无底线的大师夸奖</view>      
+        </view>
+        <view class="like_bg">
+              <view><image class="like_heart1" src="/pics/like1.png" mode="aspectFill"></image></view>
+              <view class="con_h5">890</view>
+        </view>
+  </view>
+
+  <view class="qkzt_con" bindtap='bindClick'>
+        <view class="qk_left">
+            <image class="img_tx2" src="{{userInfo.avatarUrl}}" mode="aspectFill"></image>
+        </view>
+        <view class="qk_mid">
+            <view class="con_h5">夸奖昵称【12:20:08】</view>
+            <view class="h3">以无节操无底线的大师夸奖</view>      
+        </view>
+        <view class="like_bg">
+              <view><image class="like_heart1" src="/pics/like2.png" mode="aspectFill"></image></view>
+              <view class="con_h5">892</view>
+        </view>
+  </view>
+  <view class="qkzt_con" bindtap='bindClick'>
+        <view class="qk_left">
+            <image class="img_tx2" src="{{userInfo.avatarUrl}}" mode="aspectFill"></image>
+        </view>
+        <view class="qk_mid">
+            <view class="con_h5">夸奖昵称【12:20:08】</view>
+            <view class="h3">以无节操无底线的大师夸奖</view>      
+        </view>
+        <view class="like_bg">
+              <view><image class="like_heart1" src="/pics/like2.png" mode="aspectFill"></image></view>
+              <view class="con_h5">892</view>
+        </view>
+  </view>
+  <view class="qkzt_con" bindtap='bindClick'>
+        <view class="qk_left">
+            <image class="img_tx2" src="{{userInfo.avatarUrl}}" mode="aspectFill"></image>
+        </view>
+        <view class="qk_mid">
+            <view class="con_h5">夸奖昵称【12:20:08】</view>
+            <view class="h3">以无节操无底线的大师夸奖</view>      
+        </view>
+        <view class="like_bg">
+              <view><image class="like_heart1" src="/pics/like2.png" mode="aspectFill"></image></view>
+              <view class="con_h5">892</view>
+        </view>
+  </view>
+<!--进行中的状态-悬浮按钮区域-->
+<view class="do_con">
+<view class="do_con_left"><button class='btn1'  open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="onGotUserInfo">
+  我要求夸
+</button> </view>
+<view class="do_con_right"><button class='btn2' type='primary'  open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="onGotUserInfo">
+  夸TA分赏金
+</button> </view>
+
+</view>
