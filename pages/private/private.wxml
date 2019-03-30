@@ -21,9 +21,10 @@
   <view class="swiper-tab-item {{currentTab==1 ? 'on' : ''}}" data-current="1"    bindtap="swichNav">我的求夸(12)</view>
 </view> 
 
-<swiper current="{{currentTab}}" class="swiper-box" duration="300" style="height:{{clientHeight?clientHeight-'40'+'px':'auto'}}" bindchange="bindChange" >
+<swiper current="{{currentTab}}" class="swiper-box" duration="300" style="height:{{clientHeight?clientHeight-'50'+'px':'auto'}}" bindchange="bindChange" >
   <!--发出的求夸列表样式-->
   <swiper-item> 
+    <scroll-view scroll-y="true">
     <block wx:for="{{mine}}" wx:for-item="item" wx:key='idx'>
       <view class="mrzj_con">   
           <view class="h2">{{item.content}}</view>
@@ -38,6 +39,7 @@
           </view>
       </view>
     </block>
+     </scroll-view>
   </swiper-item> 
   
   <!--我要求夸列表样式-->

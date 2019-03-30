@@ -105,6 +105,10 @@ background-color:#feffbb;
   width: 100%;
   overflow: hidden;
 }
+scroll-view{
+  width: 100%;
+  height: 98%;
+  }
 
 .mrzj_con{
   /* height: 100%; */
