@@ -17,6 +17,7 @@
 
 <swiper current="{{currentTab}}" class="swiper-box" duration="300" style="height:{{clientHeight?clientHeight-'40'+'px':'auto'}}" bindchange="bindChange" >
   <swiper-item> 
+    <scroll-view scroll-y="true">
     <block wx:for="{{hot}}" wx:for-item="item" wx:key='idx'>
       <view class="qkzt_con" bindtap='bindClick' data-id='{{item._id}}'>
         <view class="qk_left">
@@ -29,9 +30,11 @@
         <view class="qk_money"><span class="qk_money_f">¥</span>{{item.money}}</view>
       </view>
     </block>
+     </scroll-view>
   </swiper-item> 
   
   <swiper-item> 
+    <scroll-view scroll-y="true">
     <block wx:for="{{near}}" wx:for-item="item" wx:key='idx'>
       <view class="qkzt_con">
         <view class="qk_left">
@@ -44,6 +47,7 @@
         <view class="qk_money"><span class="qk_money_f">¥</span>{{item.money}}</view>
       </view>
     </block>
+     </scroll-view>
   </swiper-item>
 </swiper>
 </view>
