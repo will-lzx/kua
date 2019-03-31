@@ -74,6 +74,18 @@ Page({
             }
             zan_list.push(o)
             haszan = false
+            var compare = function (obj1, obj2) {
+              var val1 = obj1.due;
+              var val2 = obj2.due;
+              if (val1 > val2) {
+                return -1;
+              } else if (val1 < val2) {
+                return 1;
+              } else {
+                return 0;
+              }
+            } 
+            zan_list.sort(compare)
             this.setData({
               zan_list: zan_list
             }) 
@@ -83,21 +95,6 @@ Page({
         })
       }
     })
-    // wx.cloud.callFunction({
-    //   // 云函数名称
-    //   name: 'get_zan_list',
-    //   // 传给云函数的参数
-    //   data: {
-    //   }
-    // }).then(res => {
-    //   console.log(res.result.data)
-    //   that.setData({
-    //     zan_list: res.result.data
-    //   })
-    // }).catch(err => {
-    //   console.log(err)
-    // })
-    
     wx.cloud.callFunction({
       // 云函数名称
       name: 'get_openid',
@@ -214,6 +211,7 @@ Page({
   confirm: function (e) {
     var content = this.data.getinput
     var util = require('../../utils/util.js')
+    var that = this
     if (content == '') {
       wx.showToast({
         title: '请输入夸赞内容'
@@ -232,6 +230,26 @@ Page({
         success(res) {
           wx.showToast({
             title: '夸赞成功'
+          })
+          var o = {
+            '_id': res._id, '_openid': that.data.openid, 'avatarUrl': that.data.userInfo.avatarUrl, 'nickname': that.data.userInfo.nickName, 'due': util.formatTime(new Date()), 'content': that.data.getinput, 'qiukua_id': that.data.qiukua_id, 'haszan': false, 'count': 0
+          }
+          var arr = that.data.zan_list
+          arr.push(o)
+          var compare = function (obj1, obj2) {
+            var val1 = obj1.due;
+            var val2 = obj2.due;
+            if (val1 > val2) {
+              return -1;
+            } else if (val1 < val2) {
+              return 1;
+            } else {
+              return 0;
+            }
+          }
+          arr.sort(compare)
+          that.setData({
+            zan_list: arr
           })
         },
         fail: console.error
@@ -273,6 +291,18 @@ Page({
                   break;
                 }
               }
+              var compare = function (obj1, obj2) {
+                var val1 = obj1.due;
+                var val2 = obj2.due;
+                if (val1 > val2) {
+                  return -1;
+                } else if (val1 < val2) {
+                  return 1;
+                } else {
+                  return 0;
+                }
+              }
+              arr.sort(compare)
               that.setData({
                 zan_list: arr
               })
