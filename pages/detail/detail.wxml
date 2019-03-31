@@ -54,6 +54,6 @@
     </view>
   </view>
 
-  <modal id='modal' hidden='{{hiddenmodal}}' confirm-text='提交' bindcancel='cancel' bindconfirm='confirm'>  
-    <input type='text' placeholder="夸夸他" value='{{modalcontent}}' bindinput='getinput' auto-focus/>
+  <modal id='modal' hidden='{{hiddenmodal}}' confirm-text='提交' bindcancel='cancel' bindconfirm='confirm' >  
+    <view  class="k_bg"><textarea type='textarea' placeholder="换个角度狠狠夸，越狠越受欢迎（50字内）" maxlength="50" value='{{modalcontent}}' bindinput='getinput' cursor-spacing="240rpx"/></view>
   </modal>
