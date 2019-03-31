@@ -60,11 +60,12 @@ Page({
     } else {
       wx.cloud.init()
       const db = wx.cloud.database();
+      var util = require('../../utils/util.js')
       db.collection('qiukua').add({
         data: {
           content: this.data.getcontent,
           money: this.data.getinput,
-          due: new Date(),
+          due: util.formatTime(new Date()),
           nickname: this.data.userInfo.nickName,
           avatarUrl: this.data.userInfo.avatarUrl,
           gender: this.data.userInfo.gender,

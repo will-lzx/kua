@@ -60,7 +60,6 @@ Page({
       done: false
     }).orderBy('due', 'desc').get({
       success: res => {
-        console.log(res.data)
         this.setData({
           hot: res.data
         })
