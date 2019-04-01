@@ -213,7 +213,8 @@ Page({
     var that = this
     if (content == '') {
       wx.showToast({
-        title: '请输入夸赞内容'
+        title: '请输入夸赞内容',
+        type:"warn"
       })
     } else {
       wx.cloud.init()

@@ -51,11 +51,15 @@ Page({
     var value = this.data.getinput
     if (content == null || content == '') {
       wx.showToast({
-        title: '请输入求夸内容'
+        title: '请输入求夸内容',
+        icon: 'loading',
+        duration: 2000
       })
     } else if (value == null || value == ''){
       wx.showToast({
-        title: '请输入悬赏金额'
+        title: '请输入悬赏金额',
+        icon: 'loading',
+        duration: 2000
       })
     } else {
       wx.cloud.init()
