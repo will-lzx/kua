@@ -1,6 +1,5 @@
 {
   "navigationBarTitleText": "夸夸详情",
   "navigationBarBackgroundColor": "white",
-  "navigationBarTextStyle": "black",
-  "disableScroll": true
+  "navigationBarTextStyle": "black"
 }

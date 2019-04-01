@@ -9,7 +9,8 @@
 
 <!--进行中的状态-->
  <view class="time_h3">可在<span class="time_red">00:14:18</span>内,邀请好友分赏</view>
- <view class="qkzt_con" bindtap='handlezan' data-id='{{item._id}}' wx:for='{{zan_list}}' wx:for-item='item' wx:key='idx'>
+ <view class="qkzt_con_bg">
+     <view class="qkzt_con" bindtap='handlezan' data-id='{{item._id}}' wx:for='{{zan_list}}' wx:for-item='item' wx:key='idx'>
       <view class="qk_left">
           <image class="img_tx2" src="{{item.avatarUrl}}" mode="aspectFill"></image>
       </view>
@@ -26,8 +27,8 @@
             </view>
             <view class="con_h5">{{item.count}}</view>
       </view>
+    </view>
 </view>
-
 <!--进行中的状态-悬浮按钮区域-->
   <view class="do_con" wx:if='{{is_own==true}}'>
     <view class="do_con_left">
