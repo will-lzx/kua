@@ -19,7 +19,7 @@ Page({
     near: [],
     best: []
   },
-  onLoad: function (options) {
+  onShow: function (options) {
     wx.cloud.init()
     var that = this;
     wx.getSystemInfo({

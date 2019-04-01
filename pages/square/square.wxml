@@ -36,7 +36,7 @@
   <swiper-item> 
     <scroll-view scroll-y="true">
     <block wx:for="{{near}}" wx:for-item="item" wx:key='idx'>
-      <view class="qkzt_con">
+      <view class="qkzt_con" bindtap='bindClick' data-id='{{item._id}}'>
         <view class="qk_left">
             <image class="img_tx" src="{{item.avatarUrl}}" mode="aspectFill"></image>
         </view>

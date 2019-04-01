@@ -102,8 +102,6 @@ Page({
       data: {
       }
     }).then(res => {
-      console.log(this.data.own_openid)
-      console.log(res.result.openid)
       if (this.data.own_openid == res.result.openid){
         this.setData({
           is_own: true,
@@ -261,7 +259,7 @@ Page({
     }
   },
   goqiukua: function () {
-    wx.switchTab({
+    wx.reLaunch({
       url: '/pages/publish/publish'
     })
   },
