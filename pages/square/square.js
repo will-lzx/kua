@@ -102,9 +102,11 @@ Page({
       done: false
     }).orderBy('due', 'desc').get({
       success: res => {
-        this.setData({
-          best: res.data[0]
-        })
+        if (res.data.length > 0) {
+          this.setData({
+            best: res.data[0]
+          })
+        }
       }
     })
   },

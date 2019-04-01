@@ -20,6 +20,7 @@ Page({
     qiukua_id: '',
     kua_list: [],
     zan_list: []
+    
   },
 
   /**
