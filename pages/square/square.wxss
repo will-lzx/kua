@@ -85,7 +85,7 @@ scroll-view{
 .h1{
   font-size: 16px;
   line-height: 24px;
-  width: 80%;
+  width: 90%;
   font-weight: bold;
 }
 .h2{
