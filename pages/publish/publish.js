@@ -10,13 +10,18 @@ Page({
     getinput: null,
     getcontent: null,
     userInfo: {},
-    hasUserInfo: false
+    hasUserInfo: false,
+    currentWordNum: 0
   },
   getinput: function(e) {
     this.data.getinput = e.detail.value;
   },
   getcontent: function(e) {
-    this.data.getcontent = e.detail.value;
+    var value = e.detail.value
+    this.data.getcontent = value
+    this.setData({
+      currentWordNum: parseInt(value.length)
+    })
   },
 
   publish: function() {
@@ -49,6 +54,7 @@ Page({
     }
     var content = this.data.getcontent
     var value = this.data.getinput
+    var that = this
     if (content == null || content == '') {
       wx.showToast({
         title: '请输入求夸内容',
@@ -61,7 +67,7 @@ Page({
         icon: 'loading',
         duration: 2000
       })
-    } else {
+    } else if (value >0 && value < 100) {
       wx.cloud.init()
       const db = wx.cloud.database();
       var util = require('../../utils/util.js')
@@ -81,12 +87,23 @@ Page({
           done: false
         },
         success(res) {
+          that.setData({
+            getinput: null,
+            getcontent: '',
+            currentWordNum: 0
+          })
           wx.navigateTo({
             url: '/pages/detail/detail?id=' + res._id,
           })
         },
         fail: console.error
       }) 
+    } else {
+      wx.showToast({
+        title: '请输入正确的金额',
+        icon: 'loading',
+        duration: 2000
+      })
     }
   },
 

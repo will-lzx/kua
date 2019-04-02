@@ -17,7 +17,8 @@ Page({
     currentTab: 0,
     hot: [],
     near: [],
-    best: []
+    best: [],
+    best_zan: ''
   },
   onShow: function (options) {
     wx.cloud.init()
@@ -105,6 +106,19 @@ Page({
         if (res.data.length > 0) {
           this.setData({
             best: res.data[0]
+          })
+          var _id = res.data[0]._id
+          wx.cloud.callFunction({
+            // 云函数名称
+            name: 'get_zan_by_id',
+            // 传给云函数的参数
+            data: {
+              kua_id: _id
+            }
+          }).then(res => {
+            that.setData({
+              best_zan: res.result.total
+            })
           })
         }
       }
