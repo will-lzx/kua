@@ -19,8 +19,9 @@ Page({
     getinput: '',
     qiukua_id: '',
     kua_list: [],
-    zan_list: []
-    
+    zan_list: [],
+    savedImgUrl: '',
+    canvasShow: false
   },
 
   /**
@@ -142,6 +143,93 @@ Page({
         }
       })
     }
+  },
+
+  //保存海报
+  saveImageToPhoto: function () {
+    var that = this;
+    setTimeout(function () {
+      wx.canvasToTempFilePath({
+        x: 0,
+        y: 0,
+        width: 200,
+        height: 370,
+        destWidth: 1035,
+        destHeight: 1560,
+        canvasId: 'shareCanvas',
+        success: function (res) {
+          console.log(res, '保存')
+          that.setData({
+            savedImgUrl: res.tempFilePath
+          })
+        }
+      })
+    }, 1000)
+    setTimeout(function () {
+      if (that.data.savedImgUrl != "") {
+        wx.saveImageToPhotosAlbum({
+          filePath: that.data.savedImgUrl,
+          success: function () {
+            wx.showModal({
+              title: '保存图片成功',
+              content: '图片已经保存到相册，快去炫耀吧！',
+              showCancel: false,
+              success: function (res) {
+                that.setData({
+                  canvasShow: false,
+                })
+              },
+              fail: function (res) { },
+              complete: function (res) { },
+            });
+          },
+          fail: function (res) {
+            console.log(res);
+            if (res.errMsg == "saveImageToPhotosAlbum:fail cancel") {
+              wx.showModal({
+                title: '保存图片失败',
+                content: '您已取消保存图片到相册！',
+                showCancel: false
+              });
+            } else {
+              wx.showModal({
+                title: '提示',
+                content: '保存图片失败，您可以点击确定设置获取相册权限后再尝试保存！',
+                complete: function (res) {
+                  console.log(res);
+                  if (res.confirm) {
+                    wx.openSetting({}) //打开小程序设置页面，可以设置权限
+                  } else {
+                    wx.showModal({
+                      title: '保存图片失败',
+                      content: '您已取消保存图片到相册！',
+                      showCancel: false
+                    });
+                  }
+                }
+              });
+            }
+          }
+        })
+      }
+    }, 1500)
+  },
+
+  shareFriend: function () {
+    this.setData({
+      canvasShow: true
+    })
+    const ctx = wx.createCanvasContext('shareCanvas')
+    ctx.drawImage('../../pics/564.jpeg', 0, 0, 600, 900)
+    ctx.setTextAlign('center')    // 文字居中
+    ctx.setFillStyle('#000000')  // 文字颜色：黑色
+    ctx.setFontSize(22)         // 文字字号：22px
+    ctx.fillText('作者：张杰', 600 / 2, 500)
+    const qrImgSize = 180
+    ctx.drawImage('../../pics/qrcode.jpg', (600 - qrImgSize) / 2, 530, qrImgSize, qrImgSize)
+    ctx.stroke()
+    ctx.draw()
+    this.saveImageToPhoto()
   },
   /**
    * Lifecycle function--Called when page is initially rendered

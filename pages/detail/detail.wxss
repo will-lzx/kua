@@ -167,3 +167,9 @@ font-weight: bold;
   color: #333;
   line-height: 24px;
 }
+.view_show{
+  display: block
+}
+.view_hide{
+  display: none
+}

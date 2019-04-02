@@ -29,15 +29,19 @@
       </view>
     </view>
 </view>
+<view class="{{canvasShow?'view_show':'view_hide'}}"> 
+<canvas canvas-id="shareCanvas" style="width:100%;height:100%"></canvas>
+</view>
+
 <!--进行中的状态-悬浮按钮区域-->
   <view class="do_con" wx:if='{{is_own==true}}'>
     <view class="do_con_left">
-      <button class='btn1'  open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="onGotUserInfo">
+      <button class='btn1'  open-type="share" >
         分享给好友
       </button> 
     </view>
     <view class="do_con_right">
-      <button class='btn2' type='primary'  open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="onGotUserInfo">
+      <button class='btn2' type='primary' bindtap='shareFriend'>
         分享到朋友圈
       </button> 
     </view>
