@@ -57,6 +57,6 @@
 
   <modal id='modal' hidden='{{hiddenmodal}}' confirm-text='提交' bindcancel='cancel' bindconfirm='confirm' >
     <form bindsubmit="evaSubmit">
-        <textarea bindinput="bindinput" bindinput='getinput' class='text' placeholder="换个角度狠狠夸，越狠越受欢迎（50字内" value='{{modalcontent}}' maxlength="50"/>
+        <textarea bindinput="bindinput" bindinput='getinput' class='k_text' placeholder="换个角度狠狠夸，越狠越受欢迎(50字内)" value='{{modalcontent}}' maxlength="50" />
     </form>
   </modal>

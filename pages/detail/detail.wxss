@@ -162,8 +162,10 @@ font-weight: bold;
 }
 
 /* 夸奖他人的弹框输入 */
-.k_bg{
-  height: 150rpx;
-  color: #333;
-  line-height: 24px;
+.k_text{
+  height:160rpx;
+color:#333;
+line-height:24px;
+margin-left:-10px;
+
 }
