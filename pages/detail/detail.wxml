@@ -30,7 +30,8 @@
     </view>
 </view>
 <view hidden="{{canvasShow==false}}">  
-  <canvas canvas-id="shareCanvas" style="width: 300px; height: 200px;"></canvas>
+  <canvas canvas-id="shareCanvas" style="width: 520px; height: 784px;background:red;position: fixed;top: -600px;"></canvas>
+
 </view>
 
 <!--进行中的状态-悬浮按钮区域-->

@@ -152,10 +152,10 @@ Page({
       wx.canvasToTempFilePath({
         x: 0,
         y: 0,
-        width: 200,
-        height: 370,
-        destWidth: 1035,
-        destHeight: 1560,
+        width: 520,
+        height: 784,
+        destWidth: 650,
+        destHeight: 980,
         canvasId: 'shareCanvas',
         success: function (res) {
           wx.saveImageToPhotosAlbum({
@@ -211,13 +211,13 @@ Page({
     })
     const ctx = wx.createCanvasContext('shareCanvas')
 
-    ctx.drawImage('../../pics/564.png', 0, 0, 300, 200)
+    ctx.drawImage('../../pics/share_bg.jpg', 0, 0, 650, 980)
     ctx.setTextAlign('center')    // 文字居中
-    ctx.setFillStyle('#000000')  // 文字颜色：黑色
-    ctx.setFontSize(22)         // 文字字号：22px
-    ctx.fillText('作者：张杰', 300 / 2, 200)
+    ctx.setFillStyle('#ffffff')  // 文字颜色：白色
+    ctx.setFontSize(24)         // 文字字号：22px
+    ctx.fillText('今天嘴巴起泡了，求夸', 300 / 2, 200)
     const qrImgSize = 180
-    ctx.drawImage('../../pics/qrcode.jpg', (100 - qrImgSize) / 2, 30, qrImgSize, qrImgSize)
+    ctx.drawImage('../../pics/qrcode.jpg', (qrImgSize) / 2, 600, qrImgSize, qrImgSize)
     ctx.stroke()
     ctx.draw()
     this.saveImageToPhoto()
