@@ -30,7 +30,7 @@
     </view>
 </view>
 <view hidden="{{canvasShow==false}}">  
-  <canvas canvas-id="shareCanvas" style="width: 520px; height: 784px;background:red;position: fixed;top: -600px;"></canvas>
+  <canvas canvas-id="shareCanvas" style="width: 360px; height: 480px;top:-400px;left:20px;"></canvas>
 
 </view>
 
