@@ -152,18 +152,18 @@ Page({
       wx.canvasToTempFilePath({
         x: 0,
         y: 0,
-        width: 300,
-        height: 420,
-        destWidth: 650,
-        destHeight: 980,
+        width: 390,
+        height: 500,
+        destWidth: 780,
+        destHeight: 1000,
         canvasId: 'shareCanvas',
         success: function (res) {
           wx.saveImageToPhotosAlbum({
             filePath: res.tempFilePath,
             success: function () {
               wx.showModal({
-                title: '保存图片成功',
-                content: '图片已经保存到相册，快去炫耀吧！',
+                title: '图片保存成功',
+                content: '图片已存到相册，快去分享吧！',
                 showCancel: false,
                 success: function (res) {
                   that.setData({
@@ -177,8 +177,8 @@ Page({
             fail: function (res) {
               if (res.errMsg == "saveImageToPhotosAlbum:fail cancel") {
                 wx.showModal({
-                  title: '保存图片失败',
-                  content: '您已取消保存图片到相册！',
+                  title: '图片生成失败',
+                  content: '您已取消分享，图片未生成！',
                   showCancel: false
                 });
               } else {
@@ -191,7 +191,7 @@ Page({
                     } else {
                       wx.showModal({
                         title: '保存图片失败',
-                        content: '您已取消保存图片到相册！',
+                        content: '您已取消分享，图片未生成！',
                         showCancel: false
                       });
                     }
@@ -202,7 +202,7 @@ Page({
           })
         }
       })
-    }, 10000)
+    }, 100)
   },
 
   shareFriend: function () {
@@ -211,29 +211,30 @@ Page({
     })
     const ctx = wx.createCanvasContext('shareCanvas')
 
-    ctx.drawImage('../../pics/share_bg.jpg', 0, 0, 520, 784)
+    ctx.drawImage('../../pics/share_bg.jpg', 0, 0, 390, 500)
+    ctx.setTextAlign('left')    // 文字居中
+    ctx.setFillStyle('#333')  // 文字颜色：白色
+    ctx.setFontSize(16)         // 文字字号：28px
+    ctx.fillText('昵称刘志祥', 20, 430)
+    
     ctx.setTextAlign('center')    // 文字居中
     ctx.setFillStyle('#ffffff')  // 文字颜色：白色
-    ctx.setFontSize(18)         // 文字字号：28px
-    ctx.fillText('昵称刘志祥', 520 / 2, 150)
-    
-    ctx.setFillStyle('#ffffff')  // 文字颜色：白色
-    ctx.setFontSize(40)         // 文字字号：40px
-    ctx.fillText('今天嘴巴起泡了，求夸', 500 / 2, 300)
+    ctx.setFontSize(32)         // 文字字号：32px
+    ctx.fillText('今天心情不好，加班太晚，求夸夸', 300 / 2, 120)
     
     ctx.setTextAlign('left')    // 文字居中
-    ctx.setFillStyle('#ffffff')  // 文字颜色：白色
-    ctx.setFontSize(18)         // 文字字号：14px
-    ctx.fillText('长安识别二维码', 220, 560)
-    ctx.fillText('夸他分赏金', 220, 600)
-    ctx.fillText('正能量夸夸群', 220, 640)
+    ctx.setFillStyle('#666666')  // 文字颜色：白色
+    ctx.setFontSize(14)         // 文字字号：14px
+    ctx.fillText('长安识别二维码,夸他分赏金', 20, 460)
+    ctx.fillText('正能量夸夸群', 20, 485)
 
-    const qrImgSize = 120
-    ctx.drawImage('../../pics/qrcode.jpg', (qrImgSize) / 2, 540, qrImgSize, qrImgSize)
+    const qrImgSize = 90
+    ctx.drawImage('../../pics/qrcode.jpg', 280, 405, qrImgSize, qrImgSize)
     ctx.stroke()
     ctx.draw()
     this.saveImageToPhoto()
   },
+  
   /**
    * Lifecycle function--Called when page is initially rendered
    */

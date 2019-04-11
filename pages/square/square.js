@@ -150,5 +150,22 @@ Page({
         currentTab: e.target.dataset.current
       })
     }
-  }  
+  },
+  getLocation: function () {
+    let vm = this;
+    wx.getLocation({
+      type: 'wgs84',
+      success: function (res) {
+        console.log(JSON.stringify(res))
+        var latitude = res.latitude
+        var longitude = res.longitude
+        var speed = res.speed
+        var accuracy = res.accuracy;
+        vm.getLocal(latitude, longitude)
+      },
+      fail: function (res) {
+        console.log('fail' + JSON.stringify(res))
+      }
+    })
+  }
 })

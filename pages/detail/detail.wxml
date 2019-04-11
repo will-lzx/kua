@@ -29,8 +29,8 @@
       </view>
     </view>
 </view>
-<view hidden="{{canvasShow==false}}">  
-  <canvas canvas-id="shareCanvas" style="width: 360px; height: 480px;top:-400px;left:20px;"></canvas>
+<view hidden="{{canvasShow==false}}"  style="position:fixed;top:9999rpx;">  
+  <canvas canvas-id="shareCanvas" style="width: 520px; height: 784px;"  hidden="{{canvasHidden}}"></canvas>
 
 </view>
 
