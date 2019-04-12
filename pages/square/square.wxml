@@ -14,6 +14,7 @@
   <view class="swiper-tab-item {{currentTab==0 ? 'on' : ''}}" data-current="0"     bindtap="swichNav">热门求夸</view> 
   <view class="swiper-tab-item {{currentTab==1 ? 'on' : ''}}" data-current="1"    bindtap="swichNav">附近求夸</view>
 </view> 
+<text>{{userCity}}</text>
 
 <swiper current="{{currentTab}}" class="swiper-box" duration="300" style="height:{{clientHeight?clientHeight-'40'+'px':'auto'}}" bindchange="bindChange" >
   <swiper-item> 

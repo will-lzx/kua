@@ -18,11 +18,13 @@ Page({
     hot: [],
     near: [],
     best: [],
-    best_zan: ''
+    best_zan: '',
+    userCity: ''
   },
-  onShow: function (options) {
+  onLoad: function (options) {
     wx.cloud.init()
-    var that = this;
+    var that = this
+    that.getLocal()
     wx.getSystemInfo({
       success: function (res) {
         that.setData({
@@ -73,28 +75,30 @@ Page({
           }
         }
         res.data.sort(compare)
-        this.setData({
+        that.setData({
           hot: res.data
         })
       }
-    }),
+    });
+  
     db.collection('qiukua').where({
-      done: false
+      done: false,
+      city: that.data.userCity
     }).orderBy('due', 'desc').get({
       success: res => {
-        var compare = function (obj1, obj2) {
-          var val1 = obj1.due;
-          var val2 = obj2.due;
-          if (val1 > val2) {
-            return -1;
-          } else if (val1 < val2) {
-            return 1;
-          } else {
-            return 0;
-          }
-        }
-        res.data.sort(compare)
-        this.setData({
+        // var compare = function (obj1, obj2) {
+        //   var val1 = obj1.due;
+        //   var val2 = obj2.due;
+        //   if (val1 > val2) {
+        //     return -1;
+        //   } else if (val1 < val2) {
+        //     return 1;
+        //   } else {
+        //     return 0;
+        //   }
+        // }
+        // res.data.sort(compare)
+        that.setData({
           near: res.data
         })
       }
@@ -152,19 +156,85 @@ Page({
     }
   },
   getLocation: function () {
-    let vm = this;
+    let that = this
     wx.getLocation({
       type: 'wgs84',
+      success(res) {
+        const latitude = res.latitude
+        const longitude = res.longitude
+        that.getCityName(latitude, longitude)
+      }
+    })
+  },
+
+  getLocal: function () {
+    let that = this
+    wx.getSetting({
+      success: (res) => {
+        // res.authSetting['scope.userLocation'] == undefined    表示 初始化进入该页面
+        // res.authSetting['scope.userLocation'] == false    表示 非初始化进入该页面,且未授权
+        // res.authSetting['scope.userLocation'] == true    表示 地理位置授权
+        if (res.authSetting['scope.userLocation'] != undefined && res.authSetting['scope.userLocation'] != true) {
+          wx.showModal({
+            title: '请求授权当前位置',
+            content: '需要获取您的地理位置，请确认授权',
+            success: function (res) {
+              if (res.cancel) {
+                wx.showToast({
+                  title: '拒绝授权',
+                  icon: 'none',
+                  duration: 1000
+                })
+              } else if (res.confirm) {
+                wx.openSetting({
+                  success: function (dataAu) {
+                    if (dataAu.authSetting["scope.userLocation"] == true) {
+                      wx.showToast({
+                        title: '授权成功',
+                        icon: 'success',
+                        duration: 1000
+                      })
+                      that.getLocation()
+                    } else {
+                      wx.showToast({
+                        title: '授权失败',
+                        icon: 'none',
+                        duration: 1000
+                      })
+                    }
+                  }
+                })
+              }
+            }
+          })
+        } else if (res.authSetting['scope.userLocation'] == undefined) {
+          wx.getLocation({
+            success: function (data) {
+              console.log(data);
+              wx.showToast({ //这里提示失败原因
+                title: '授权成功！',
+                duration: 1500
+              })
+              that.getLocation()
+            }
+          })
+        }
+        else {
+          that.getLocation()
+        }
+      }
+    })
+  },
+
+  getCityName: function (latitude, longitude) {
+    let that = this
+    wx.request({
+      url: 'https://apis.map.qq.com/ws/geocoder/v1/?location=' + latitude + ',' + longitude + '&key=SB7BZ-6VKHO-LX4WZ-S2H4X-3DBG5-BCBLE',
+      data: {},
       success: function (res) {
-        console.log(JSON.stringify(res))
-        var latitude = res.latitude
-        var longitude = res.longitude
-        var speed = res.speed
-        var accuracy = res.accuracy;
-        vm.getLocal(latitude, longitude)
+        that.data.userCity = res.data.result.address_component.city
       },
       fail: function (res) {
-        console.log('fail' + JSON.stringify(res))
       }
     })
   }
