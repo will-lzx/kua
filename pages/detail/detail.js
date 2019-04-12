@@ -212,16 +212,57 @@ Page({
     const ctx = wx.createCanvasContext('shareCanvas')
 
     ctx.drawImage('../../pics/share_bg.jpg', 0, 0, 390, 500)
+    // 下面是动态获取的求夸者的昵称
     ctx.setTextAlign('left')    // 文字居中
     ctx.setFillStyle('#333')  // 文字颜色：白色
     ctx.setFontSize(16)         // 文字字号：28px
     ctx.fillText('昵称刘志祥', 20, 430)
     
+    // 下面是动态获取的求夸内容主题
     ctx.setTextAlign('center')    // 文字居中
     ctx.setFillStyle('#ffffff')  // 文字颜色：白色
-    ctx.setFontSize(32)         // 文字字号：32px
-    ctx.fillText('今天心情不好，加班太晚，求夸夸', 300 / 2, 120)
-    
+    ctx.setFontSize(36)         // 文字字号：36px
+    ctx.setShadow(0, 3, 1, '#d2321e')  // 字体阴影
+    var text = '今天心情不好加班太晚求夸夸今天心情不好加班太晚求夸夸';//这是要绘制的文本，动态取求夸的内容
+    var chr = text.split("");//这个方法是将一个字符串分割成字符串数组
+    var temp = "";
+    var row = [];
+    for (var a = 0; a < chr.length; a++) {
+      if (ctx.measureText(temp).width < 270) {
+        temp += chr[a];
+      }
+      else {
+        a--; //这里添加了a-- 是为了防止字符丢失，效果图中有对比
+        row.push(temp);
+        temp = "";
+      }
+    }
+    row.push(temp);
+
+    //如果数组长度大于2 则截取前两个
+    if (row.length > 2) {
+      var rowCut = row.slice(0, 2);
+      var rowPart = rowCut[1];
+      var test = "";
+      var empty = [];
+      for (var a = 0; a < rowPart.length; a++) {
+        if (ctx.measureText(test).width < 250) {
+          test += rowPart[a];
+        }
+        else {
+          break;
+        }
+      }
+      empty.push(test);
+      var group = empty[0] + "..."//这里只显示两行，超出的用...表示
+      rowCut.splice(1, 1, group);
+      row = rowCut;
+    }
+    for (var b = 0; b < row.length; b++) {
+      ctx.fillText(row[b], 197,125 + b * 44, 270);
+    }
+  
+    ctx.setShadow(0, 0, 0, '#a91704')  // 字体阴影
     ctx.setTextAlign('left')    // 文字居中
     ctx.setFillStyle('#666666')  // 文字颜色：白色
     ctx.setFontSize(14)         // 文字字号：14px
