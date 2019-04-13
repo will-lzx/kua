@@ -216,14 +216,15 @@ Page({
     ctx.setTextAlign('left')    // 文字居中
     ctx.setFillStyle('#333')  // 文字颜色：白色
     ctx.setFontSize(16)         // 文字字号：28px
-    ctx.fillText('昵称刘志祥', 20, 430)
+    ctx.fillText('昵称:' + this.data.userInfo.nickName, 20, 430)
     
     // 下面是动态获取的求夸内容主题
     ctx.setTextAlign('center')    // 文字居中
     ctx.setFillStyle('#ffffff')  // 文字颜色：白色
     ctx.setFontSize(36)         // 文字字号：36px
     ctx.setShadow(0, 3, 1, '#d2321e')  // 字体阴影
-    var text = '今天心情不好加班太晚求夸夸今天心情不好加班太晚求夸夸';//这是要绘制的文本，动态取求夸的内容
+    console.log(this.data.list)
+    var text = this.data.list[0]['content'];//这是要绘制的文本，动态取求夸的内容
     var chr = text.split("");//这个方法是将一个字符串分割成字符串数组
     var temp = "";
     var row = [];

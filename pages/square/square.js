@@ -23,6 +23,7 @@ Page({
   },
   onLoad: function (options) {
     wx.cloud.init()
+    const db = wx.cloud.database()
     var that = this
     that.getLocal()
     wx.getSystemInfo({
@@ -58,51 +59,9 @@ Page({
         }
       })
     };
-    const db = wx.cloud.database()
-    db.collection('qiukua').where({
-      done: false
-    }).orderBy('due', 'desc').get({
-      success: res => {
-        var compare = function (obj1, obj2) {
-          var val1 = obj1.due;
-          var val2 = obj2.due;
-          if (val1 > val2) {
-            return -1;
-          } else if (val1 < val2) {
-            return 1;
-          } else {
-            return 0;
-          }
-        }
-        res.data.sort(compare)
-        that.setData({
-          hot: res.data
-        })
-      }
-    });
-  
-    db.collection('qiukua').where({
-      done: false,
-      city: that.data.userCity
-    }).orderBy('due', 'desc').get({
-      success: res => {
-        // var compare = function (obj1, obj2) {
-        //   var val1 = obj1.due;
-        //   var val2 = obj2.due;
-        //   if (val1 > val2) {
-        //     return -1;
-        //   } else if (val1 < val2) {
-        //     return 1;
-        //   } else {
-        //     return 0;
-        //   }
-        // }
-        // res.data.sort(compare)
-        that.setData({
-          near: res.data
-        })
-      }
-    }),
+    
+    that.getHot()
+
     db.collection('qiukua').where({
       done: false
     }).orderBy('due', 'desc').get({
@@ -147,19 +106,68 @@ Page({
   },
   swichNav: function (e) {
     var that = this;
-    if (this.data.currentTab === e.target.dataset.current) {
+    if (that.data.currentTab === e.target.dataset.current) {
       return false;
     } else {
       that.setData({
         currentTab: e.target.dataset.current
       })
+      if (that.data.currentTab === '0') {
+        that.getHot()
+      } else {
+        that.getNear()
+      }
     }
   },
+
+  getNear: function () {
+    const db = wx.cloud.database()
+    var that = this
+    db.collection('qiukua').where({
+      done: false,
+      city: that.data.userCity
+    }).orderBy('due', 'desc').get({
+      success: res => {
+        that.setData({
+          near: res.data
+        })
+      }
+    })
+  },
+  getHot: function () {
+    console.log('why')
+    var that = this
+    const db = wx.cloud.database()
+
+    db.collection('qiukua').where({
+      done: false
+    }).orderBy('due', 'desc').get({
+      success: res => {
+        var compare = function (obj1, obj2) {
+          var val1 = obj1.due;
+          var val2 = obj2.due;
+          if (val1 > val2) {
+            return -1;
+          } else if (val1 < val2) {
+            return 1;
+          } else {
+            return 0;
+          }
+        }
+        res.data.sort(compare)
+        that.setData({
+          hot: res.data
+        })
+      }
+    })
+  },
+
   getLocation: function () {
     let that = this
     wx.getLocation({
       type: 'wgs84',
       success(res) {
+        console.log('来了吗？')
         const latitude = res.latitude
         const longitude = res.longitude
         that.getCityName(latitude, longitude)
@@ -237,5 +245,8 @@ Page({
       fail: function (res) {
       }
     })
+  },
+  onShow: function (e) {
+    this.onLoad();
   }
 })
