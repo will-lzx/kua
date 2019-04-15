@@ -71,12 +71,13 @@ Page({
     } else if (value >0 && value < 100) {
       wx.cloud.init()
       const db = wx.cloud.database();
-      var util = require('../../utils/util.js')
+      var create_time = new Date()
+      console.log(create_time.getTime())
       db.collection('qiukua').add({
         data: {
           content: that.data.getcontent,
           money: that.data.getinput,
-          due: util.formatTime(new Date()),
+          due: create_time.getTime(),
           nickname: that.data.userInfo.nickName,
           avatarUrl: that.data.userInfo.avatarUrl,
           gender: that.data.userInfo.gender,

@@ -21,7 +21,9 @@ Page({
     kua_list: [],
     zan_list: [],
     savedImgUrl: '',
-    canvasShow: false
+    canvasShow: false,
+    wxTimerList: {},
+    done: false
   },
 
   /**
@@ -30,14 +32,38 @@ Page({
   onLoad: function (options) {
     this.data.qiukua_id = options.id
     const db = wx.cloud.database()
+    var that = this
     db.collection('qiukua').where({
       _id: options.id
     }).get({
       success: res => {
-        this.setData({
+        that.setData({
           list: res.data,
           own_openid: res.data[0]._openid
         })
+        console.log(res.data[0])
+        if (res.data[0].done) {
+          that.setData({
+            done: true
+          })
+        } else {
+          
+          var t = res.data[0].due
+          var t_now = new Date()
+          console.log(t)
+          console.log(t_now.getTime())
+          var t_cha = 12 * 60 * 60 * 1000 - (t_now.getTime() - t)
+          var timer = app.globalData.timer
+          var wxTimer = new timer({
+            beginTime: dateformat(t_cha),
+            complete: function () {
+              that.setData({
+                done: true
+              })
+            }
+          })
+          wxTimer.start(this);
+        }
       }
     })
     
@@ -59,7 +85,7 @@ Page({
           }).then(res => {
             var haszan = false
             res.result.data.forEach((item1) => {
-              if (item1._openid == this.data.openid) {
+              if (item1._openid == that.data.openid) {
                 haszan = true
               }
             })
@@ -88,7 +114,7 @@ Page({
               }
             } 
             zan_list.sort(compare)
-            this.setData({
+            that.setData({
               zan_list: zan_list
             }) 
           }).catch(err => {
@@ -104,13 +130,13 @@ Page({
       data: {
       }
     }).then(res => {
-      if (this.data.own_openid == res.result.openid){
-        this.setData({
+      if (that.data.own_openid == res.result.openid){
+        that.setData({
           is_own: true,
           openid: res.result.openid
         })
       } else {
-        this.setData({
+        that.setData({
           is_own: false,
           openid: res.result.openid
         })
@@ -119,15 +145,15 @@ Page({
       console.log(err)
     })
     if (app.globalData.userInfo) {
-      this.setData({
+      that.setData({
         userInfo: app.globalData.userInfo,
         hasUserInfo: true
       })
-    } else if (this.data.canIUse) {
+    } else if (that.data.canIUse) {
       // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
       // 所以此处加入 callback 以防止这种情况
       app.userInfoReadyCallback = res => {
-        this.setData({
+        that.setData({
           userInfo: res.userInfo,
           hasUserInfo: true
         })
@@ -136,7 +162,7 @@ Page({
       wx.getUserInfo({
         success: res => {
           app.globalData.userInfo = res.userInfo
-          this.setData({
+          that.setData({
             userInfo: res.userInfo,
             hasUserInfo: true
           })
@@ -343,7 +369,6 @@ Page({
   },
   confirm: function (e) {
     var content = this.data.getinput
-    var util = require('../../utils/util.js')
     var that = this
     if (content == '') {
       wx.showToast({
@@ -353,11 +378,12 @@ Page({
     } else {
       wx.cloud.init()
       const db = wx.cloud.database();
+      var create_time = new Date()
       db.collection('kua').add({
         data: {
           content: this.data.getinput,
           qiukua_id: this.data.qiukua_id,
-          due: util.formatTime(new Date()),
+          due: create_time.getTime(),
           nickname: this.data.userInfo.nickName,
           avatarUrl: this.data.userInfo.avatarUrl
         },
@@ -402,10 +428,10 @@ Page({
   handlezan: function (e) {
     var kua_id = e.currentTarget.dataset.id
     console.log(kua_id)
-    var util = require('../../utils/util.js')
     const db = wx.cloud.database();
     wx.cloud.init()
     var that = this
+    var create_time = new Date()
     db.collection('zan').where({
       kua_id: kua_id
     }).count({
@@ -414,7 +440,7 @@ Page({
           db.collection('zan').add({
             data: {
               kua_id: kua_id,
-              due: util.formatTime(new Date())
+              due: create_time.getTime()
             },
             success(res) {
               var arr = that.data.zan_list
@@ -469,3 +495,36 @@ Page({
     })
   }
 })
+
+function dateformat(micro_second) {
+  console.log('haha')
+  var second = micro_second / 1000
+
+  // 天数位   
+  var day = Math.floor(second / 3600 / 24);
+  var dayStr = day.toString();
+  if (dayStr.length == 1) dayStr = '0' + dayStr;
+
+  console.log(dayStr)
+  // 小时位   
+  //var hr = Math.floor(second / 3600 % 24);
+  var hr = Math.floor(second / 3600);  //直接转为小时 没有天 超过1天为24小时以上
+
+  var hrStr = hr.toString();
+  if (hrStr.length == 1) hrStr = '0' + hrStr;
+  console.log(hrStr)
+
+  // 分钟位  
+  var min = Math.floor(second / 60 % 60);
+  var minStr = min.toString();
+  if (minStr.length == 1) minStr = '0' + minStr;
+
+  // 秒位  
+  var sec = Math.floor(second % 60);
+  var secStr = sec.toString();
+  if (secStr.length == 1) secStr = '0' + secStr;
+
+  return hrStr + ":" + minStr + ":" + secStr;
+
+}
+

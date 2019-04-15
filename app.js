@@ -40,6 +40,7 @@ App({
     })
   },
   globalData: {
-    userInfo: null
+    userInfo: null,
+    timer: require('./utils/wxTimer.js')
   }
 })

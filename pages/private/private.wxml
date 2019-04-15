@@ -30,7 +30,7 @@
           <view class="h2">{{item.content}}</view>
           <view class="bc_con">
             <view class="bc_img"><image class="img_small" src="/pics/time.png" mode="aspectFill"></image></view>
-            <view class="bc_date">2019/03/28 12:20:29</view>
+            <view class="bc_date">{{item.due}}</view>
             <view class="bc_img"><image class="img_small" src="/pics/like1.png" mode="aspectFill"></image></view>
             <view class="bc_like">12879</view>
           </view>
@@ -50,7 +50,7 @@
           <view class="h2">{{item.content}}</view>
           <view class="bc_con">
             <view class="bc_img"><image class="img_small" src="/pics/time.png" mode="aspectFill"></image></view>
-            <view class="bc_date">2019/03/28 12:20:29</view>
+            <view class="bc_date">{{item.due}}</view>
             <view class="bc_img"><image class="img_small" src="/pics/kua.png" mode="aspectFill"></image></view>
             <view class="bc_like">128709</view>
           </view>

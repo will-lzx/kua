@@ -8,7 +8,12 @@
 </view>
 
 <!--进行中的状态-->
- <view class="time_h3">可在<span class="time_red">00:14:18</span>内,邀请好友分赏</view>
+<view wx:if='{{done}}'>
+ <view class="time_h3">该求夸活动结束, 悬赏已被瓜分</view>
+</view>
+<view wx:else>
+  <view class="time_h3">可在<span class="time_red">{{wxTimer}}</span>内,邀请好友分赏</view>
+</view>
  <view class="qkzt_con_bg">
      <view class="qkzt_con" bindtap='handlezan' data-id='{{item._id}}' wx:for='{{zan_list}}' wx:for-item='item' wx:key='idx'>
       <view class="qk_left">

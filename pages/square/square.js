@@ -62,10 +62,18 @@ Page({
     
     that.getHot()
 
+    const _ = db.command
+    const date_now = new Date()
+    date_now.setHours(0)
+    date_now.setMinutes(0)
+    date_now.setSeconds(0)
+    const expect_date = date_now.getTime()
+    console.log(expect_date)
     db.collection('qiukua').where({
-      done: false
+      due: _.gte(expect_date)
     }).orderBy('due', 'desc').get({
       success: res => {
+        console.log(res)
         if (res.data.length > 0) {
           this.setData({
             best: res.data[0]
@@ -245,8 +253,5 @@ Page({
       fail: function (res) {
       }
     })
-  },
-  onShow: function (e) {
-    this.onLoad();
   }
 })
