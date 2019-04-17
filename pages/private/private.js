@@ -61,35 +61,7 @@ Page({
     }    
     var util = require('../../utils/util.js')
     const db = wx.cloud.database()
-    wx.cloud.callFunction({
-      // 云函数名称
-      name: 'get_mine_qiukua'
-    }).then(res => {
-        var tmp = []
-        res.result.data.forEach((item1) => {
-          db.collection('kua').where({
-            qiukua_id: item1._id
-          }).get({
-            success: res => {
-              var kua_id_list = []
-              res.data.forEach((item2) => {
-                kua_id_list.push(item2._id)
-              })
-              let _ = db.command
-              db.collection('zan').where({
-                kua_id: _.in(kua_id_list)
-              }).count().then(res => {
-                var zan_count = res.total
-                tmp.push({ 'content': item1.content, 'due': util.formatTime(new Date(item1.due)), 'money': item1.money, 'zan_count': zan_count })
-                this.setData({
-                  mine: tmp,
-                  mine_count: tmp.length
-                })
-              })
-            }
-          })
-        })
-    })
+
     wx.cloud.callFunction({
       // 云函数名称
       name: 'get_kua_by_openid'
@@ -124,8 +96,39 @@ Page({
             })
           }
         })
-      })  
+      })
     })
+    
+    wx.cloud.callFunction({
+      // 云函数名称
+      name: 'get_mine_qiukua'
+    }).then(res => {
+        var tmp = []
+        res.result.data.forEach((item1) => {
+          db.collection('kua').where({
+            qiukua_id: item1._id
+          }).get({
+            success: res => {
+              var kua_id_list = []
+              res.data.forEach((item2) => {
+                kua_id_list.push(item2._id)
+              })
+              let _ = db.command
+              db.collection('zan').where({
+                kua_id: _.in(kua_id_list)
+              }).count().then(res => {
+                var zan_count = res.total
+                tmp.push({ 'content': item1.content, 'due': util.formatTime(new Date(item1.due)), 'money': item1.money, 'zan_count': zan_count })
+                this.setData({
+                  mine: tmp,
+                  mine_count: tmp.length
+                })
+              })
+            }
+          })
+        })
+    })
+    
   },
 
   /**
