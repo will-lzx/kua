@@ -34,7 +34,8 @@
             <view class="bc_like">{{item.zan_count}}</view>
           </view>
           <view class="like_bg">
-              <view class="like_heart1">分到<span class="yel_money">1.5元</span></view>
+              <view class="like_heart1">分到</view>
+              <view class="yel_money">1.5元</view>
           </view>
       </view>
     </block>
@@ -54,7 +55,8 @@
             <view class="bc_like">{{item.zan_count}}</view>
           </view>
           <view class="like_bg">
-              <view class="like_heart1">悬赏<span class="yel_money">{{item.money}}</span></view>
+              <view class="like_heart1">悬赏</view>
+              <view class="yel_money">{{item.money}}元</view>
           </view>
       </view>
     </block>
