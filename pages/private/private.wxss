@@ -158,7 +158,7 @@ scroll-view{
   margin-top: 30rpx;
 }
 .bc_img{
-  margin-right: 8rpx;
+  margin-right: 5rpx;
   text-align: left;
   float: left;
 }
@@ -175,4 +175,5 @@ scroll-view{
   width: 15px;
   height: 15px;
   border: none;
+  margin-top:1px;
 }
