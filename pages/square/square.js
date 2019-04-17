@@ -68,7 +68,6 @@ Page({
     date_now.setMinutes(0)
     date_now.setSeconds(0)
     const expect_date = date_now.getTime()
-    console.log(expect_date)
     db.collection('qiukua').where({
       due: _.gte(expect_date)
     }).orderBy('due', 'desc').get({
@@ -253,5 +252,10 @@ Page({
       fail: function (res) {
       }
     })
-  }
+  },
+  onPullDownRefresh() {
+    
+    this.onLoad()
+    
+  },
 })

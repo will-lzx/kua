@@ -25,7 +25,7 @@ Page({
    * Lifecycle function--Called when page load
    */
   onLoad: function (options) {
-    wx.cloud.init()
+    
     var that = this;
     wx.getSystemInfo({
       success: function (res) {
@@ -59,76 +59,7 @@ Page({
         }
       })
     }    
-    var util = require('../../utils/util.js')
-    const db = wx.cloud.database()
-
-    wx.cloud.callFunction({
-      // 云函数名称
-      name: 'get_kua_by_openid'
-    }).then(res => {
-      var tmp = []
-      res.result.data.forEach((item1) => {
-        var that = this
-        db.collection('qiukua').where({
-          _id: item1.qiukua_id
-        }).get({
-          success: res => {
-            var qiukua = res.data
-            db.collection('kua').where({
-              qiukua_id: qiukua[0]._id
-            }).get({
-              success: res => {
-                var kua_id_list = []
-                var _ = db.command
-                res.data.forEach((item) => {
-                  kua_id_list.push(item._id)
-                })
-                db.collection('zan').where({
-                  kua_id: _.in(kua_id_list)
-                }).count().then(res => {
-                  tmp.push({ 'content': item1.content, 'qiukua_content': qiukua[0].content, 'zan_count': res.total })
-                  that.setData({
-                    kua: tmp,
-                    kua_count: tmp.length
-                  })
-                })
-              }
-            })
-          }
-        })
-      })
-    })
-    
-    wx.cloud.callFunction({
-      // 云函数名称
-      name: 'get_mine_qiukua'
-    }).then(res => {
-        var tmp = []
-        res.result.data.forEach((item1) => {
-          db.collection('kua').where({
-            qiukua_id: item1._id
-          }).get({
-            success: res => {
-              var kua_id_list = []
-              res.data.forEach((item2) => {
-                kua_id_list.push(item2._id)
-              })
-              let _ = db.command
-              db.collection('zan').where({
-                kua_id: _.in(kua_id_list)
-              }).count().then(res => {
-                var zan_count = res.total
-                tmp.push({ 'content': item1.content, 'due': util.formatTime(new Date(item1.due)), 'money': item1.money, 'zan_count': zan_count })
-                this.setData({
-                  mine: tmp,
-                  mine_count: tmp.length
-                })
-              })
-            }
-          })
-        })
-    })
-    
+    that.getKua()
   },
 
   /**
@@ -180,6 +111,83 @@ Page({
 
   },
 
+  getKua: function () {
+    var util = require('../../utils/util.js')
+    const db = wx.cloud.database()
+
+    wx.cloud.callFunction({
+      // 云函数名称
+      name: 'get_kua_by_openid'
+    }).then(res => {
+      var tmp = []
+      res.result.data.forEach((item1) => {
+        var that = this
+        db.collection('qiukua').where({
+          _id: item1.qiukua_id
+        }).get({
+          success: res => {
+            var qiukua = res.data
+            db.collection('kua').where({
+              qiukua_id: qiukua[0]._id
+            }).get({
+              success: res => {
+                var kua_id_list = []
+                var _ = db.command
+                res.data.forEach((item) => {
+                  kua_id_list.push(item._id)
+                })
+                db.collection('zan').where({
+                  kua_id: _.in(kua_id_list)
+                }).count().then(res => {
+                  tmp.push({ 'content': item1.content, 'qiukua_content': qiukua[0].content, 'zan_count': res.total })
+                  that.setData({
+                    kua: tmp,
+                    kua_count: tmp.length
+                  })
+                })
+              }
+            })
+          }
+        })
+      })
+    })
+  },
+
+  getQiukua: function () {
+    var util = require('../../utils/util.js')
+    wx.cloud.init()
+    const db = wx.cloud.database()
+    wx.cloud.callFunction({
+      // 云函数名称
+      name: 'get_mine_qiukua'
+    }).then(res => {
+      var tmp = []
+      res.result.data.forEach((item1) => {
+        db.collection('kua').where({
+          qiukua_id: item1._id
+        }).get({
+          success: res => {
+            var kua_id_list = []
+            res.data.forEach((item2) => {
+              kua_id_list.push(item2._id)
+            })
+            let _ = db.command
+            db.collection('zan').where({
+              kua_id: _.in(kua_id_list)
+            }).count().then(res => {
+              var zan_count = res.total
+              tmp.push({ 'content': item1.content, 'due': util.formatTime(new Date(item1.due)), 'money': item1.money, 'zan_count': zan_count })
+              this.setData({
+                mine: tmp,
+                mine_count: tmp.length
+              })
+            })
+          }
+        })
+      })
+    })
+  },
+
   bindChange: function (e) {
     var that = this;
     that.setData({ currentTab: e.detail.current });
@@ -193,6 +201,12 @@ Page({
       that.setData({
         currentTab: e.target.dataset.current
       })
+      if (that.data.currentTab === '0') {
+        that.getKua()
+      } else {
+        that.getQiukua()
+      }
     }
+
   }
 })

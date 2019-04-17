@@ -396,7 +396,7 @@ Page({
           })
           let kua_time = new Date()
           var o = {
-            '_id': res._id, '_openid': that.data.openid, 'avatarUrl': that.data.userInfo.avatarUrl, 'nickname': that.data.userInfo.nickName, 'due': util.formatTime(new Date()), 'content': that.data.getinput, 'qiukua_id': that.data.qiukua_id, 'haszan': false, 'count': 0
+            '_id': res._id, '_openid': that.data.openid, 'avatarUrl': that.data.userInfo.avatarUrl, 'nickname': that.data.userInfo.nickName, 'due': util.formatTime(new Date()), 'content': that.data.getinput, 'qiukua_id': that.data.qiukua_id, 'money': 0, 'haszan': false, 'count': 0
           }
           var arr = that.data.zan_list
           arr.push(o)
@@ -444,6 +444,7 @@ Page({
           db.collection('zan').add({
             data: {
               kua_id: kua_id,
+              money: 0,
               due: create_time.getTime()
             },
             success(res) {
