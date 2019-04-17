@@ -30,6 +30,7 @@ Page({
    * Lifecycle function--Called when page load
    */
   onLoad: function (options) {
+    
     this.data.qiukua_id = options.id
     const db = wx.cloud.database()
     var that = this
@@ -68,6 +69,7 @@ Page({
     })
     
     wx.cloud.init()
+    var util = require('../../utils/util.js')
     var zan_list = []
     db.collection('kua').where({
       qiukua_id: options.id
@@ -96,7 +98,7 @@ Page({
               'content': item.content,
               'nickname': item.nickname,
               'qiukua_id': item.qiukua_id,
-              'due': item.due,
+              'due': util.formatTime(new Date(item.due)),
               'count': res.result.data.length,
               'haszan': haszan
             }
@@ -369,6 +371,7 @@ Page({
   },
   confirm: function (e) {
     var content = this.data.getinput
+    var util = require('../../utils/util.js')
     var that = this
     if (content == '') {
       wx.showToast({
@@ -391,6 +394,7 @@ Page({
           wx.showToast({
             title: '夸赞成功'
           })
+          let kua_time = new Date()
           var o = {
             '_id': res._id, '_openid': that.data.openid, 'avatarUrl': that.data.userInfo.avatarUrl, 'nickname': that.data.userInfo.nickName, 'due': util.formatTime(new Date()), 'content': that.data.getinput, 'qiukua_id': that.data.qiukua_id, 'haszan': false, 'count': 0
           }
@@ -497,7 +501,6 @@ Page({
 })
 
 function dateformat(micro_second) {
-  console.log('haha')
   var second = micro_second / 1000
 
   // 天数位   

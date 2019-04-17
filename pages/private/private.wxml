@@ -17,22 +17,21 @@
 <view class="conter">
 
 <view class="swiper-tab">
-  <view class="swiper-tab-item {{currentTab==0 ? 'on' : ''}}" data-current="0"     bindtap="swichNav">发出的夸奖(38)</view> 
-  <view class="swiper-tab-item {{currentTab==1 ? 'on' : ''}}" data-current="1"    bindtap="swichNav">我的求夸(12)</view>
+  <view class="swiper-tab-item {{currentTab==0 ? 'on' : ''}}" data-current="0"     bindtap="swichNav">发出的夸奖({{kua_count}})</view> 
+  <view class="swiper-tab-item {{currentTab==1 ? 'on' : ''}}" data-current="1"    bindtap="swichNav">我的求夸({{mine_count}})</view>
 </view> 
 
 <swiper current="{{currentTab}}" class="swiper-box" duration="300" style="height:{{clientHeight?clientHeight-'160'+'px':'auto'}}" bindchange="bindChange" >
   <!--发出的求夸列表样式-->
   <swiper-item> 
     <scroll-view scroll-y="true">
-    <block wx:for="{{mine}}" wx:for-item="item" wx:key='idx'>
+    <block wx:for="{{kua}}" wx:for-item="item" wx:key='idx'>
       <view class="mrzj_con">   
           <view class="h2">{{item.content}}</view>
           <view class="bc_con">
-            <view class="bc_img"><image class="img_small" src="/pics/time.png" mode="aspectFill"></image></view>
-            <view class="bc_date">{{item.due}}</view>
+            <view class="bc_date">To:{{item.qiukua_content}}</view>
             <view class="bc_img"><image class="img_small" src="/pics/like1.png" mode="aspectFill"></image></view>
-            <view class="bc_like">12879</view>
+            <view class="bc_like">{{item.zan_count}}</view>
           </view>
           <view class="like_bg">
               <view class="like_heart1">分到<span class="yel_money">1.5元</span></view>
@@ -52,10 +51,10 @@
             <view class="bc_img"><image class="img_small" src="/pics/time.png" mode="aspectFill"></image></view>
             <view class="bc_date">{{item.due}}</view>
             <view class="bc_img"><image class="img_small" src="/pics/kua.png" mode="aspectFill"></image></view>
-            <view class="bc_like">128709</view>
+            <view class="bc_like">{{item.zan_count}}</view>
           </view>
           <view class="like_bg">
-              <view class="like_heart1">悬赏<span class="yel_money">1.5元</span></view>
+              <view class="like_heart1">悬赏<span class="yel_money">{{item.money}}</span></view>
           </view>
       </view>
     </block>
