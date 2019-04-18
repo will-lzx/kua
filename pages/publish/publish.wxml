@@ -10,4 +10,4 @@
         </view>
 </view>
 <view class="butt_fb"><button  class='btn1' hover-class='btn_hover' bindtap='publish'>发布悬赏</button></view>
-<view class="ts">15分钟内没人夸赞，将自动退回赏金</view>
+<view class="ts">12小时内没人夸赞，将自动退回赏金</view>

@@ -1,7 +1,7 @@
 // pages/private/private.js
 const app = getApp()
+const util = require('../../utils/util.js')
 Page({
-
   /**
    * Page initial data
    */
@@ -25,7 +25,6 @@ Page({
    * Lifecycle function--Called when page load
    */
   onLoad: function (options) {
-    
     var that = this;
     wx.getSystemInfo({
       success: function (res) {
@@ -112,7 +111,7 @@ Page({
   },
 
   getKua: function () {
-    var util = require('../../utils/util.js')
+    
     const db = wx.cloud.database()
 
     wx.cloud.callFunction({
@@ -133,17 +132,15 @@ Page({
               success: res => {
                 var kua_id_list = []
                 var _ = db.command
+                var zan_count = 0
+
                 res.data.forEach((item) => {
-                  kua_id_list.push(item._id)
+                  zan_count += item.zan_count
                 })
-                db.collection('zan').where({
-                  kua_id: _.in(kua_id_list)
-                }).count().then(res => {
-                  tmp.push({ 'content': item1.content, 'qiukua_content': qiukua[0].content, 'zan_count': res.total })
-                  that.setData({
-                    kua: tmp,
-                    kua_count: tmp.length
-                  })
+                tmp.push({ 'content': item1.content, 'qiukua_content': qiukua[0].content, 'zan_count': zan_count })
+                that.setData({
+                  kua: tmp,
+                  kua_count: tmp.length
                 })
               }
             })
@@ -154,7 +151,6 @@ Page({
   },
 
   getQiukua: function () {
-    var util = require('../../utils/util.js')
     wx.cloud.init()
     const db = wx.cloud.database()
     wx.cloud.callFunction({
@@ -168,19 +164,16 @@ Page({
         }).get({
           success: res => {
             var kua_id_list = []
+            var zan_count = 0
             res.data.forEach((item2) => {
               kua_id_list.push(item2._id)
+              zan_count += item2.zan_count
             })
-            let _ = db.command
-            db.collection('zan').where({
-              kua_id: _.in(kua_id_list)
-            }).count().then(res => {
-              var zan_count = res.total
-              tmp.push({ 'content': item1.content, 'due': util.formatTime(new Date(item1.due)), 'money': item1.money, 'zan_count': zan_count })
-              this.setData({
-                mine: tmp,
-                mine_count: tmp.length
-              })
+
+            tmp.push({ 'content': item1.content, 'due': util.formatTime(new Date(item1.due)), 'money': item1.money, 'zan_count': zan_count })
+            this.setData({
+              mine: tmp,
+              mine_count: tmp.length
             })
           }
         })
@@ -207,6 +200,5 @@ Page({
         that.getQiukua()
       }
     }
-
   }
 })

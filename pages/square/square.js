@@ -17,8 +17,9 @@ Page({
     currentTab: 0,
     hot: [],
     near: [],
-    best: [],
-    best_zan: '',
+    best_kua_content: '',
+    best_qiukua_content: '',
+    best_zan_count: 0,
     userCity: ''
   },
   onLoad: function (options) {
@@ -68,31 +69,27 @@ Page({
     date_now.setMinutes(0)
     date_now.setSeconds(0)
     const expect_date = date_now.getTime()
-    db.collection('qiukua').where({
+    db.collection('kua').where({
       due: _.gte(expect_date)
-    }).orderBy('due', 'desc').get({
-      success: res => {
-        console.log(res)
-        if (res.data.length > 0) {
-          this.setData({
-            best: res.data[0]
+    }).orderBy('zan_count', 'desc').limit(1).get().then(res => {
+      if (res.data.length > 0) {
+        db.collection('qiukua').where({
+          _id: res.data[0].qiukua_id
+        }).get().then(res2 => {
+          that.setData({
+            best_kua_content: res.data[0].content,
+            best_zan_count: res.data[0].zan_count,
+            best_qiukua_content: res2.data[0].content
           })
-          var _id = res.data[0]._id
-          wx.cloud.callFunction({
-            // 云函数名称
-            name: 'get_zan_by_id',
-            // 传给云函数的参数
-            data: {
-              kua_id: _id
-            }
-          }).then(res => {
-            that.setData({
-              best_zan: res.result.total
-            })
-          })
-        }
+        })
+      } else {
+        that.setData({
+          best_kua_content: '最佳夸赞，虚席以待',
+          best_zan_count: 0,
+          best_qiukua_content: '快来发布一个求夸，登上今日最佳吧'
+        })
       }
-    })
+    })       
   },
   getUserInfo: function (e) {
     app.globalData.userInfo = e.detail.userInfo
@@ -254,8 +251,6 @@ Page({
     })
   },
   onPullDownRefresh() {
-    
     this.onLoad()
-    
   },
 })

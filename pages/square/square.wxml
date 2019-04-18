@@ -1,11 +1,11 @@
 <view class="mrzj_bg">
    <view class="mrzj_til">每日最佳</view>
    <view class="mrzj_con">   
-      <view class="h1">{{best.content}}</view>
-      <view class="mrzj_con_zt">For：{{best.content}}</view>
+      <view class="h1">{{best_kua_content}}</view>
+      <view class="mrzj_con_zt">For：{{best_qiukua_content}}</view>
       <view class="like_bg">
           <view><image class="like_heart1" src="/pics/like2.png" mode="aspectFill"></image></view>
-          <view class="zt_white">{{best_zan}}</view>
+          <view class="zt_white">{{best_zan_count}}</view>
       </view>
    </view>
 </view>

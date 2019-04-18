@@ -1,5 +1,6 @@
 // pages/detail/detail.js
 const app = getApp()
+var util = require('../../utils/util.js')
 
 Page({
 
@@ -30,10 +31,10 @@ Page({
    * Lifecycle function--Called when page load
    */
   onLoad: function (options) {
-    
+    var that = this
     this.data.qiukua_id = options.id
     const db = wx.cloud.database()
-    var that = this
+    
     db.collection('qiukua').where({
       _id: options.id
     }).get({
@@ -42,17 +43,14 @@ Page({
           list: res.data,
           own_openid: res.data[0]._openid
         })
-        console.log(res.data[0])
         if (res.data[0].done) {
           that.setData({
             done: true
           })
         } else {
-          
           var t = res.data[0].due
           var t_now = new Date()
-          console.log(t)
-          console.log(t_now.getTime())
+          // 12 hours
           var t_cha = 12 * 60 * 60 * 1000 - (t_now.getTime() - t)
           var timer = app.globalData.timer
           var wxTimer = new timer({
@@ -69,62 +67,6 @@ Page({
     })
     
     wx.cloud.init()
-    var util = require('../../utils/util.js')
-    var zan_list = []
-    db.collection('kua').where({
-      qiukua_id: options.id
-    }).orderBy('due', 'desc').get({
-      success: res => {
-        var kua_list = res.data
-        kua_list.forEach((item) => {
-          wx.cloud.callFunction({
-            // 云函数名称
-            name: 'get_zan_list',
-            // 传给云函数的参数
-            data: {
-              kua_id: item._id
-            }
-          }).then(res => {
-            var haszan = false
-            res.result.data.forEach((item1) => {
-              if (item1._openid == that.data.openid) {
-                haszan = true
-              }
-            })
-            var o = {
-              '_id': item._id,
-              '_openid': item._openid,
-              'avatarUrl': item.avatarUrl,
-              'content': item.content,
-              'nickname': item.nickname,
-              'qiukua_id': item.qiukua_id,
-              'due': util.formatTime(new Date(item.due)),
-              'count': res.result.data.length,
-              'haszan': haszan
-            }
-            zan_list.push(o)
-            haszan = false
-            var compare = function (obj1, obj2) {
-              var val1 = obj1.due;
-              var val2 = obj2.due;
-              if (val1 > val2) {
-                return -1;
-              } else if (val1 < val2) {
-                return 1;
-              } else {
-                return 0;
-              }
-            } 
-            zan_list.sort(compare)
-            that.setData({
-              zan_list: zan_list
-            }) 
-          }).catch(err => {
-            console.log(err)
-          })    
-        })
-      }
-    })
     wx.cloud.callFunction({
       // 云函数名称
       name: 'get_openid',
@@ -143,6 +85,7 @@ Page({
           openid: res.result.openid
         })
       }
+      that.getKua(options.id)
     }).catch(err => {
       console.log(err)
     })
@@ -171,6 +114,62 @@ Page({
         }
       })
     }
+    
+  },
+
+  getKua: function (qiukua_id) {
+    var that = this
+    var zan_list = []
+    const db = wx.cloud.database()
+    db.collection('kua').where({
+      qiukua_id: qiukua_id
+    }).orderBy('due', 'desc').get({
+      success: res => {
+        var kua_list = res.data
+        kua_list.forEach((item) => {
+          
+          db.collection('zan').where({
+            kua_id: item._id,
+            _openid: that.data.openid
+          }).count().then(res => {
+            console.log('openid', that.data.openid)
+            var haszan = false
+            if (res.total === 1) {
+              haszan = true
+            }
+            var o = {
+              '_id': item._id,
+              '_openid': item._openid,
+              'avatarUrl': item.avatarUrl,
+              'content': item.content,
+              'nickname': item.nickname,
+              'qiukua_id': item.qiukua_id,
+              'due': util.formatTime(new Date(item.due)),
+              'count': item.zan_count,
+              'haszan': haszan
+            }
+            
+            zan_list.push(o)
+            haszan = false
+            var compare = function (obj1, obj2) {
+              var val1 = obj1.due;
+              var val2 = obj2.due;
+              if (val1 > val2) {
+                return -1;
+              } else if (val1 < val2) {
+                return 1;
+              } else {
+                return 0;
+              }
+            }
+            zan_list.sort(compare)
+            that.setData({
+              zan_list: zan_list
+            })
+          })
+        })
+      }
+    })
   },
 
   //保存海报
@@ -388,7 +387,8 @@ Page({
           qiukua_id: this.data.qiukua_id,
           due: create_time.getTime(),
           nickname: this.data.userInfo.nickName,
-          avatarUrl: this.data.userInfo.avatarUrl
+          avatarUrl: this.data.userInfo.avatarUrl,
+          zan_count: 0
         },
         success(res) {
           wx.showToast({
@@ -396,7 +396,7 @@ Page({
           })
           let kua_time = new Date()
           var o = {
-            '_id': res._id, '_openid': that.data.openid, 'avatarUrl': that.data.userInfo.avatarUrl, 'nickname': that.data.userInfo.nickName, 'due': util.formatTime(new Date()), 'content': that.data.getinput, 'qiukua_id': that.data.qiukua_id, 'money': 0, 'haszan': false, 'count': 0
+            '_id': res._id, '_openid': that.data.openid, 'avatarUrl': that.data.userInfo.avatarUrl, 'nickname': that.data.userInfo.nickName, 'due': util.formatTime(new Date()), 'content': that.data.getinput, 'qiukua_id': that.data.qiukua_id, 'haszan': false, 'count': 0
           }
           var arr = that.data.zan_list
           arr.push(o)
@@ -433,6 +433,7 @@ Page({
     var kua_id = e.currentTarget.dataset.id
     console.log(kua_id)
     const db = wx.cloud.database();
+    const _ = db.command
     wx.cloud.init()
     var that = this
     var create_time = new Date()
@@ -444,7 +445,6 @@ Page({
           db.collection('zan').add({
             data: {
               kua_id: kua_id,
-              money: 0,
               due: create_time.getTime()
             },
             success(res) {
@@ -456,21 +456,22 @@ Page({
                   break;
                 }
               }
-              var compare = function (obj1, obj2) {
-                var val1 = obj1.due;
-                var val2 = obj2.due;
-                if (val1 > val2) {
-                  return -1;
-                } else if (val1 < val2) {
-                  return 1;
-                } else {
-                  return 0;
-                }
-              }
-              arr.sort(compare)
+              // var compare = function (obj1, obj2) {
+              //   var val1 = obj1.due;
+              //   var val2 = obj2.due;
+              //   if (val1 > val2) {
+              //     return -1;
+              //   } else if (val1 < val2) {
+              //     return 1;
+              //   } else {
+              //     return 0;
+              //   }
+              // }
+              // arr.sort(compare)
               that.setData({
                 zan_list: arr
-              })
+              }),
+              update_zan(kua_id, 1)
             },
             fail: console.error
           })
@@ -492,6 +493,7 @@ Page({
             that.setData({
               zan_list: arr
             })
+            update_zan(kua_id, -1)
           }).catch(err => {
             console.log(err)
           })
@@ -500,6 +502,16 @@ Page({
     })
   }
 })
+
+function update_zan(kua_id, number) {
+  const db = wx.cloud.database();
+  const _ = db.command
+  db.collection('kua').doc(kua_id).update({
+    data: {
+      zan_count: _.inc(number)
+    }
+  })
+}
 
 function dateformat(micro_second) {
   var second = micro_second / 1000
@@ -529,6 +541,5 @@ function dateformat(micro_second) {
   if (secStr.length == 1) secStr = '0' + secStr;
 
   return hrStr + ":" + minStr + ":" + secStr;
-
 }
 
