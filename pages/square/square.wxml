@@ -28,7 +28,10 @@
             <view class="con_h3">{{item.nickname}}</view>
             <view class="h2">{{item.content}}</view>      
         </view>
-        <view class="qk_money"><span class="qk_money_f">¥</span>{{item.money}}</view>
+        <view class="like_bg">
+              <view class="like_heart1">悬赏</view>
+              <view class="yel_money">{{item.money}}元                  </view>
+        </view>
       </view>
     </block>
      </scroll-view>
@@ -45,7 +48,10 @@
             <view class="con_h3">{{item.nickname}}</view>
             <view class="h2">{{item.content}}</view>      
         </view>
-        <view class="qk_money"><span class="qk_money_f">¥</span>{{item.money}}</view>
+        <view class="like_bg">
+              <view class="like_heart1">悬赏</view>
+              <view class="yel_money">{{item.money}}元                  </view>
+        </view>
       </view>
     </block>
      </scroll-view>
