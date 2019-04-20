@@ -6,7 +6,7 @@
     "pages/private/private",
     "pages/publish/publish",
     "pages/detail/detail"
-    ],
+  ],
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#ff4d4d",
@@ -42,6 +42,10 @@
   "permission": {
     "scope.userLocation": {
       "desc": "你的位置信息将用于小程序位置接口的效果展示"
-    }
-  }
+    },
+    "openapi": [
+      "wxacode.get"
+    ]
+  },
+  "sitemapLocation": "sitemap.json"
 }

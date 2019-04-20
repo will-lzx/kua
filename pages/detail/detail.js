@@ -24,7 +24,8 @@ Page({
     savedImgUrl: '',
     canvasShow: false,
     wxTimerList: {},
-    done: false
+    done: false,
+    filePath: ''
   },
 
   /**
@@ -32,7 +33,9 @@ Page({
    */
   onLoad: function (options) {
     var that = this
-    this.data.qiukua_id = options.id
+    that.setData({
+      qiukua_id: options.id
+    })
     const db = wx.cloud.database()
     
     db.collection('qiukua').where({
@@ -233,10 +236,24 @@ Page({
   },
 
   shareFriend: function () {
-    this.setData({
+    let that = this
+    that.setData({
       canvasShow: true
     })
     const ctx = wx.createCanvasContext('shareCanvas')
+    const fsm = wx.getFileSystemManager()
+    const FILE_BASE_NAME = 'tmp_base64src';
+    const filePath = wx.env.USER_DATA_PATH + '/tmp.png'
+    const buffer = this.getQrcode()
+    console.log('bufeer', buffer)
+    fsm.writeFile({
+      filePath,
+      data: buffer,
+      encoding: 'binary',
+      success (res) {
+        console.log('rrr re s', res)
+      }
+    });
 
     ctx.drawImage('../../pics/share_bg.jpg', 0, 0, 390, 500)
     // 下面是动态获取的求夸者的昵称
@@ -298,10 +315,24 @@ Page({
     ctx.fillText('正能量夸夸群', 20, 485)
 
     const qrImgSize = 90
-    ctx.drawImage('../../pics/qrcode.jpg', 280, 405, qrImgSize, qrImgSize)
+    ctx.drawImage(filePath, 280, 405, qrImgSize, qrImgSize)
     ctx.stroke()
     ctx.draw()
     this.saveImageToPhoto()
+  },
+
+  getQrcode: function () {
+    let that = this
+    wx.cloud.init()
+    wx.cloud.callFunction({
+      name: 'getQrcode',
+      data: {
+        id: that.data.qiukua_id
+      }
+    }).then(res => {
+      console.log('buffer',res)
+      return res.buffer
+    })
   },
   
   /**
