@@ -101,7 +101,7 @@ scroll-view{
   text-align: center;
   position: absolute;right:20rpx;top:10px;
 }
-.like_heart1{
+.like_heart2{
   width: 20px;
   height: 20px;
   border-radius:20px;
@@ -137,7 +137,7 @@ scroll-view{
 }
 .qk_mid{
 float: left;
-width: 70%;
+width: 65%;
 margin-left: 20rpx;
 text-align: left;
 }
@@ -163,4 +163,24 @@ text-align: left;
   height: 50px;
   border-radius:50%;
   border: none;
+}
+
+.like_bg{
+  text-align: center;
+  position: absolute;right:20rpx;top:42rpx;
+  font-size: 12px;
+}
+.like_heart1{
+  width: 40px;
+  height: 40px;
+  border-radius:40px;
+  padding: 5px;
+  background-color: #ff4d4d;
+  color: white;
+}
+.yel_money{
+  font-size: 14px;
+  color: #feffbb;
+  font-weight: bold;
+  margin-top:-30px;
 }
