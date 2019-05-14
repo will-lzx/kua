@@ -5,7 +5,8 @@
     "pages/logs/logs",
     "pages/private/private",
     "pages/publish/publish",
-    "pages/detail/detail"
+    "pages/detail/detail",
+    "pages/withdraw/withdraw"
   ],
   "window": {
     "backgroundTextStyle": "light",

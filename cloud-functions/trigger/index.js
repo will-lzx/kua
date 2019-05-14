@@ -10,7 +10,8 @@ exports.main = async (event, context) => {
   
   var n = new Date()
   // 12 hours
-  var n_s = n.getTime() - 720 * 60 * 1000
+  var n_s = n.getTime() - 12 * 60 * 60 * 1000
+  // var n_s = n.getTime() - 5 * 60 * 1000
   const _ = db.command
   const res = await db.collection('qiukua').where({
     done: false,
@@ -24,6 +25,7 @@ exports.main = async (event, context) => {
       done: true
     },
   })
+
   res.data.forEach((item) => {
     cloud.callFunction({
       name: 'dis_shangjin',
@@ -33,5 +35,15 @@ exports.main = async (event, context) => {
         money: item.money
       }
     })
-  })
+    cloud.callFunction({
+      name: 'send_templatemessage_close',
+      data: {
+        toUser: item._openid,
+        formId: item.formId,
+        title: item.content,
+        money: item.money
+      }
+    })
+  }
+  )
 }

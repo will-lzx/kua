@@ -12,13 +12,16 @@ Page({
     mine: [],
     kua: [],
     mine_count: 0,
-    kua_count: 0
+    kua_count: 0,
+    money: 10
   },
 
-  onGotUserInfo: function (e) {
-    console.log(e.detail.errMsg)
-    console.log(e.detail.userInfo)
-    console.log(e.detail.rawData)
+  withdraw: function (e) {
+    let that = this
+    wx.cloud.init()
+    wx.navigateTo({
+      url: '/pages/withdraw/withdraw?money=' + that.data.money,
+    })
   },
 
   /**

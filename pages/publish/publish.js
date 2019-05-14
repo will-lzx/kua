@@ -25,7 +25,8 @@ Page({
     })
   },
 
-  publish: function() {
+  publish: function(e) {
+    let formId = e.detail.formId
     let that = this
     wx.cloud.init()
     if (app.globalData.userInfo)
@@ -83,6 +84,7 @@ Page({
           gender: that.data.userInfo.gender,
           city: that.data.userCity,
           province: that.data.userInfo.province,
+          formId: formId,
           tags: [
             'cloud',
           ],

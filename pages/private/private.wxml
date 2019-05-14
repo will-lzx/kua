@@ -8,8 +8,8 @@
               <view class="h2">{{userInfo.nickName}}</view>
               <view class="con_h3">您已成为正能量使者</view>      
            </view>
-           <view class="tx_con_right"><button class='btn1' hover-class='btn_hover' open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="onGotUserInfo">
-  提现(40)元
+           <view class="tx_con_right"><button class='btn1' hover-class='btn_hover' lang="zh_CN" bindtap='withdraw'>
+  提现({{money}})元
 </button> </view>
       </view>
 </view>

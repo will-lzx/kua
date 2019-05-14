@@ -1,5 +1,6 @@
 <!--pages/publish/publish.wxml-->
-<view class="fb_bg">
+<form bindsubmit='publish' report-submit='true'>
+  <view class="fb_bg">
    <view class="fb_til">发布心情，悬赏求夸</view>
    <view class="fb_dis"><textarea style="width:100%; height: 60px;font-size: 14px;"  maxlength="50" value='{{getcontent}}' placeholder='输入想求夸的内容。如：我不开心，求夸' bindinput='getcontent'>
    </textarea></view>
@@ -8,6 +9,7 @@
        <view class="fb_m_left">悬赏金额</view>
        <view class="fb_m_right"><input type="digit" style="width:100%; height: 40px;font-size: 14px;"  id='money' value='{{getinput}}' maxlength='2' placeholder='元' bindinput='getinput'></input></view>
         </view>
-</view>
-<view class="butt_fb"><button  class='btn1' hover-class='btn_hover' bindtap='publish'>发布悬赏</button></view>
-<view class="ts">12小时内没人夸赞，将自动退回赏金</view>
+    </view>
+    <view class="butt_fb"><button  class='btn1' hover-class='btn_hover' form-type="submit">发布悬赏</button></view>
+    <view class="ts">12小时内没人夸赞，将自动退回赏金</view>
+</form>
