@@ -2,7 +2,7 @@
    <view class="mrzj_til">每日最佳</view>
    <view class="mrzj_con">   
       <view class="h1">{{best_kua_content}}</view>
-      <view class="mrzj_con_zt">For：{{best_qiukua_content}}</view>
+      <view class="mrzj_con_zt">夸：{{best_qiukua_content}}</view>
       <view class="like_bg">
           <view><image class="like_heart2" src="/pics/like2.png" mode="aspectFill"></image></view>
           <view class="zt_white">{{best_zan_count}}</view>
@@ -30,7 +30,7 @@
         </view>
         <view class="like_bg">
               <view class="like_heart1">悬赏</view>
-              <view class="yel_money">{{item.money}}元                  </view>
+              <view class="yel_money">¥{{item.money}}                  </view>
         </view>
       </view>
     </block>
@@ -50,7 +50,7 @@
         </view>
         <view class="like_bg">
               <view class="like_heart1">悬赏</view>
-              <view class="yel_money">{{item.money}}元                  </view>
+              <view class="yel_money">¥{{item.money}}                 </view>
         </view>
       </view>
     </block>
