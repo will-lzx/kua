@@ -1,0 +1,8 @@
+<!--pages/withdraw/withdraw.wxml-->
+<view>
+  <view>{{money}}</view>
+  <view>提现手续费: {{fee}}</view>
+  <view>
+    <button bindtap="withdraw">提现到微信钱包</button>
+  </view>
+</view>
