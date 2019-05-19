@@ -114,9 +114,7 @@ Page({
   },
 
   getKua: function () {
-    
     const db = wx.cloud.database()
-
     wx.cloud.callFunction({
       // 云函数名称
       name: 'get_kua_by_openid'
@@ -140,7 +138,7 @@ Page({
                 res.data.forEach((item) => {
                   zan_count += item.zan_count
                 })
-                tmp.push({ 'content': item1.content, 'qiukua_content': qiukua[0].content, 'zan_count': zan_count })
+                tmp.push({ 'id': item1.qiukua_id, 'content': item1.content, 'qiukua_content': qiukua[0].content, 'zan_count': zan_count })
                 that.setData({
                   kua: tmp,
                   kua_count: tmp.length
@@ -173,7 +171,7 @@ Page({
               zan_count += item2.zan_count
             })
 
-            tmp.push({ 'content': item1.content, 'due': util.formatTime(new Date(item1.due)), 'money': item1.money, 'zan_count': zan_count })
+            tmp.push({ 'id': item1._id, 'content': item1.content, 'due': util.formatTime(new Date(item1.due)), 'money': item1.money, 'zan_count': zan_count })
             this.setData({
               mine: tmp,
               mine_count: tmp.length
@@ -203,5 +201,12 @@ Page({
         that.getQiukua()
       }
     }
+  },
+  bindClick: function (e) {
+    var id = e.currentTarget.dataset.id
+    console.log('id', id)
+    wx.navigateTo({
+      url: '/pages/detail/detail?id=' + id
+    })
   }
 })

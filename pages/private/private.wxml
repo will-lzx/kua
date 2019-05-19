@@ -26,7 +26,7 @@
   <swiper-item> 
     <scroll-view scroll-y="true">
     <block wx:for="{{kua}}" wx:for-item="item" wx:key='idx'>
-      <view class="mrzj_con">   
+      <view class="mrzj_con" bindtap='bindClick' data-id='{{item.id}}'>   
           <view class="h2">{{item.content}}</view>
           <view class="bc_con">
             <view class="bc_date">To:{{item.qiukua_content}}</view>
@@ -46,7 +46,7 @@
   <swiper-item> 
     <scroll-view scroll-y="true">
     <block wx:for="{{mine}}" wx:for-item="item" wx:key='idx'>
-      <view class="mrzj_con">   
+      <view class="mrzj_con" bindtap='bindClick' data-id='{{item.id}}'>   
           <view class="h2">{{item.content}}</view>
           <view class="bc_con">
             <view class="bc_img"><image class="img_small" src="/pics/time.png" mode="aspectFill"></image></view>
