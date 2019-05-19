@@ -29,7 +29,7 @@
       <view class="mrzj_con" bindtap='bindClick' data-id='{{item.id}}'>   
           <view class="h2">{{item.content}}</view>
           <view class="bc_con">
-            <view class="bc_date">To:{{item.qiukua_content}}</view>
+            <view class="bc_date">夸:{{item.qiukua_content}}</view>
             <view class="bc_img"><image class="img_small" src="/pics/like1.png" mode="aspectFill"></image></view>
             <view class="bc_like">{{item.zan_count}}</view>
           </view>
